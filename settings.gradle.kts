@@ -16,3 +16,14 @@ include("order:order-application")
 findProject(":order:order-application")?.name = "order-application"
 include("order:order-container")
 findProject(":order:order-container")?.name = "order-container"
+include("payment")
+include("payment:payment-domain")
+findProject(":payment:payment-domain")?.name = "payment-domain"
+include("payment:payment-application")
+findProject(":payment:payment-application")?.name = "payment-application"
+include("payment:payment-container")
+findProject(":payment:payment-container")?.name = "payment-container"
+include("payment:payment-messaging")
+findProject(":payment:payment-messaging")?.name = "payment-messaging"
+include("payment:payment-persistence")
+findProject(":payment:payment-persistence")?.name = "payment-persistence"
