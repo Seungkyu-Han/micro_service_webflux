@@ -10,7 +10,11 @@ repositories {
 }
 
 dependencies {
-    testImplementation(kotlin("test"))
+    implementation("org.mongodb:bson:5.3.1")
+
+
+    implementation("org.jetbrains.kotlin:kotlin-reflect")
+
 }
 
 tasks.test {
