@@ -12,7 +12,7 @@ class Payment(
     val orderId: OrderId,
     val customerId: CustomerId,
     val price: Money,
-    val paymentStatus: PaymentStatus,
+    var paymentStatus: PaymentStatus,
     val createdAt: LocalDateTime = LocalDateTime.now(),
 ){
     override fun equals(other: Any?): Boolean {
