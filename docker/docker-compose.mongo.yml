@@ -1,0 +1,11 @@
+services:
+  mongodb-msa:
+    image: mongo:latest
+    container_name: mongodb-msa
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./mongodb:/data
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=seungkyu
+      - MONGO_INITDB_ROOT_PASSWORD=1204
