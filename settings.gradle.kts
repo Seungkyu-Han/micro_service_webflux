@@ -27,3 +27,16 @@ include("payment:payment-messaging")
 findProject(":payment:payment-messaging")?.name = "payment-messaging"
 include("payment:payment-persistence")
 findProject(":payment:payment-persistence")?.name = "payment-persistence"
+include("restaurant")
+include("restaurant:restaurant-application")
+findProject(":restaurant:restaurant-application")?.name = "restaurant-application"
+include("restaurant:restaurant-container")
+findProject(":restaurant:restaurant-container")?.name = "restaurant-container"
+include("restaurant:restaurant-domain")
+findProject(":restaurant:restaurant-domain")?.name = "restaurant-domain"
+include("restaurant:restaurant-messaging")
+findProject(":restaurant:restaurant-messaging")?.name = "restaurant-messaging"
+include("restaurant:payment-persistence")
+findProject(":restaurant:payment-persistence")?.name = "payment-persistence"
+include("restaurant:restaurant-persistence")
+findProject(":restaurant:restaurant-persistence")?.name = "restaurant-persistence"
