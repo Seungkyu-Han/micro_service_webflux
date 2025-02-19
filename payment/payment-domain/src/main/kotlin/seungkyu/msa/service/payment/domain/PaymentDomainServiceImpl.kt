@@ -3,6 +3,7 @@ package seungkyu.msa.service.payment.domain
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 import seungkyu.msa.service.common.status.PaymentStatus
+import seungkyu.msa.service.common.valueObject.Money
 import seungkyu.msa.service.payment.domain.entity.Credit
 import seungkyu.msa.service.payment.domain.entity.Payment
 import seungkyu.msa.service.payment.domain.event.PaymentCompletedEvent
@@ -51,6 +52,10 @@ class PaymentDomainServiceImpl: PaymentDomainService {
             payment.paymentStatus = PaymentStatus.FAILED
             return PaymentFailedEvent(payment, LocalDateTime.now(), failureMessages)
         }
+    }
+
+    override fun deposit(credit: Credit, money: Money) {
+        credit.addCreditAmount(money)
     }
 
     private fun validateCredit(payment: Payment, credit: Credit, failureMessages: MutableList<String>) {
