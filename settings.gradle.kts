@@ -40,3 +40,14 @@ include("restaurant:payment-persistence")
 findProject(":restaurant:payment-persistence")?.name = "payment-persistence"
 include("restaurant:restaurant-persistence")
 findProject(":restaurant:restaurant-persistence")?.name = "restaurant-persistence"
+include("customer")
+include("customer:customer-application")
+findProject(":customer:customer-application")?.name = "customer-application"
+include("customer:customer-container")
+findProject(":customer:customer-container")?.name = "customer-container"
+include("customer:customer-domain")
+findProject(":customer:customer-domain")?.name = "customer-domain"
+include("customer:customer-messaging")
+findProject(":customer:customer-messaging")?.name = "customer-messaging"
+include("customer:customer-persistence")
+findProject(":customer:customer-persistence")?.name = "customer-persistence"
