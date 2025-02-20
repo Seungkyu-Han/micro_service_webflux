@@ -1,0 +1,37 @@
+{
+  "namespace": "seungkyu.msa.service.kafka.model",
+  "type": "record",
+  "name": "PaymentRequestAvroModel",
+  "fields": [
+
+    {
+      "name": "id",
+      "type": "string"
+    },
+
+    {
+      "name": "orderId",
+      "type": "string"
+    },
+
+    {
+      "name": "customerId",
+      "type": "string"
+    },
+
+    {
+      "name": "price",
+      "type": "long"
+    },
+
+    {
+      "name": "paymentStatus",
+      "type": "int"
+    },
+
+    {
+      "name": "createdAt",
+      "type": "long"
+    }
+  ]
+}

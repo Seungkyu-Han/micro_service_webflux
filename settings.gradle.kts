@@ -51,3 +51,6 @@ include("customer:customer-messaging")
 findProject(":customer:customer-messaging")?.name = "customer-messaging"
 include("customer:customer-persistence")
 findProject(":customer:customer-persistence")?.name = "customer-persistence"
+include("infrastructure")
+include("infrastructure:kafka")
+findProject(":infrastructure:kafka")?.name = "kafka"
