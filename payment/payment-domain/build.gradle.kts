@@ -14,8 +14,11 @@ repositories {
 
 dependencies {
     implementation(project(":common:common-domain"))
+    implementation("org.mongodb:bson:5.3.1")
 
     implementation("org.springframework.boot:spring-boot-starter-webflux")
+    implementation("org.springframework:spring-tx:6.2.3")
+
 }
 
 tasks.test {

@@ -25,10 +25,13 @@ class PaymentDomainServiceImpl: PaymentDomainService {
 
         if(failureMessages.isEmpty()){
             logger.info("주문 {}의 결제가 시작되었습니다.", payment.orderId.id)
+            //금액을 빼고 상태를 완료로 변경
+            credit.subtractCreditAmount(payment.price)
             payment.paymentStatus = PaymentStatus.COMPLETED
             return PaymentCompletedEvent(payment, LocalDateTime.now(), failureMessages)
         }
         else{
+            //금액을 빼지 않고 상태를 실패로 변경
             logger.info("주문 {}의 결제가 실패했습니다.", payment.orderId.id)
             payment.paymentStatus = PaymentStatus.FAILED
             return PaymentFailedEvent(payment, LocalDateTime.now(), failureMessages)
