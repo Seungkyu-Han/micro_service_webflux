@@ -1,5 +1,6 @@
 package seungkyu.msa.service.payment.domain
 
+import org.bson.types.ObjectId
 import seungkyu.msa.service.common.valueObject.Money
 import seungkyu.msa.service.payment.domain.entity.Credit
 import seungkyu.msa.service.payment.domain.entity.Payment
@@ -12,4 +13,6 @@ interface PaymentDomainService {
     fun validateAndCancelPayment(payment: Payment, credit: Credit, failureMessages: MutableList<String>): PaymentEvent
 
     fun deposit(credit: Credit, money: Money)
+
+    fun createUser(id: ObjectId): Credit
 }
