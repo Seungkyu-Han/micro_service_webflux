@@ -65,6 +65,8 @@ data class OrderDetail(
     fun approveOrder(restaurant: Restaurant) {
         for(productId in orderProducts.keys){
             restaurant.products[productId]!!.quantity -= orderProducts[productId]!!
+            if(orderProducts[productId]!! == 0)
+                orderProducts.remove(productId)
         }
         orderApprovalStatus = OrderApprovalStatus.APPROVED
     }

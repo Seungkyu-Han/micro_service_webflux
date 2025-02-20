@@ -1,8 +1,12 @@
 package seungkyu.msa.service.restaurant.domain
 
+import org.bson.types.ObjectId
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
+import seungkyu.msa.service.common.valueObject.ProductId
+import seungkyu.msa.service.common.valueObject.RestaurantId
 import seungkyu.msa.service.restaurant.domain.entity.OrderDetail
+import seungkyu.msa.service.restaurant.domain.entity.Product
 import seungkyu.msa.service.restaurant.domain.entity.Restaurant
 import seungkyu.msa.service.restaurant.domain.event.OrderApprovalEvent
 import seungkyu.msa.service.restaurant.domain.event.OrderApprovedEvent
@@ -38,5 +42,18 @@ class RestaurantDomainServiceImpl: RestaurantDomainService {
                 createdAt = LocalDateTime.now(),
             )
         }
+    }
+
+    override fun createRestaurant(): Restaurant {
+        return Restaurant(
+            id = RestaurantId(ObjectId.get()),
+            products = emptyMap<ProductId, Product>().toMap(HashMap()),
+            isActive = true
+        )
+    }
+
+    override fun addProduct(restaurant: Restaurant, product: Product): Restaurant{
+        restaurant.addProduct(product)
+        return restaurant
     }
 }

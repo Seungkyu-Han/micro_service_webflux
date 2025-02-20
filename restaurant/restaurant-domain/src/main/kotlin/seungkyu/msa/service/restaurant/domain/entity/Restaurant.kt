@@ -20,4 +20,8 @@ data class Restaurant(
     override fun hashCode(): Int {
         return id.hashCode()
     }
+
+    fun addProduct(product: Product) {
+        products[product.productId] = product
+    }
 }
