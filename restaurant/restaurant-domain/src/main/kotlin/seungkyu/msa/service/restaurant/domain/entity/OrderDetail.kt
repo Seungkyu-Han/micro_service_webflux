@@ -5,10 +5,11 @@ import seungkyu.msa.service.common.status.OrderStatus
 import seungkyu.msa.service.common.valueObject.Money
 import seungkyu.msa.service.common.valueObject.OrderId
 import seungkyu.msa.service.common.valueObject.ProductId
+import seungkyu.msa.service.common.valueObject.RestaurantId
 
 data class OrderDetail(
     val id: OrderId,
-    val restaurant: Restaurant,
+    val restaurantId: RestaurantId,
     val totalAmount: Money,
     val orderProducts: HashMap<ProductId, Int>,
     val orderStatus: OrderStatus,
@@ -27,7 +28,7 @@ data class OrderDetail(
         return id.hashCode()
     }
 
-    fun validateOrder(failureMessages: MutableList<String>){
+    fun validateOrder(restaurant: Restaurant, failureMessages: MutableList<String>){
         if(!restaurant.isActive){
             failureMessages.add("현재 ${restaurant.id.id}식당이 운영 중이 아닙니다")
             return
@@ -61,7 +62,7 @@ data class OrderDetail(
         }
     }
 
-    fun approveOrder() {
+    fun approveOrder(restaurant: Restaurant) {
         for(productId in orderProducts.keys){
             restaurant.products[productId]!!.quantity -= orderProducts[productId]!!
         }

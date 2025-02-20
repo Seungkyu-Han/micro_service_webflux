@@ -1,5 +1,5 @@
 package seungkyu.msa.service.common.status
 
 enum class OrderApprovalStatus{
-    APPROVED, REJECTED
+    APPROVED, REJECTED, UNKNOWN
 }
