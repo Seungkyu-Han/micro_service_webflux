@@ -14,10 +14,10 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class PaymentRequestAvroModel extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -6789372815188289011L;
+  private static final long serialVersionUID = 3369829044590829111L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"PaymentRequestAvroModel\",\"namespace\":\"seungkyu.msa.service.kafka.model\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"orderId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"customerId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"price\",\"type\":\"long\"},{\"name\":\"paymentStatus\",\"type\":\"int\"},{\"name\":\"createdAt\",\"type\":\"long\"}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"PaymentRequestAvroModel\",\"namespace\":\"seungkyu.msa.service.kafka.model\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"orderId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"customerId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"price\",\"type\":\"long\"},{\"name\":\"paymentStatus\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"createdAt\",\"type\":\"long\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -77,7 +77,7 @@ public class PaymentRequestAvroModel extends org.apache.avro.specific.SpecificRe
   private java.lang.String orderId;
   private java.lang.String customerId;
   private long price;
-  private int paymentStatus;
+  private java.lang.String paymentStatus;
   private long createdAt;
 
   /**
@@ -96,7 +96,7 @@ public class PaymentRequestAvroModel extends org.apache.avro.specific.SpecificRe
    * @param paymentStatus The new value for paymentStatus
    * @param createdAt The new value for createdAt
    */
-  public PaymentRequestAvroModel(java.lang.String id, java.lang.String orderId, java.lang.String customerId, java.lang.Long price, java.lang.Integer paymentStatus, java.lang.Long createdAt) {
+  public PaymentRequestAvroModel(java.lang.String id, java.lang.String orderId, java.lang.String customerId, java.lang.Long price, java.lang.String paymentStatus, java.lang.Long createdAt) {
     this.id = id;
     this.orderId = orderId;
     this.customerId = customerId;
@@ -134,7 +134,7 @@ public class PaymentRequestAvroModel extends org.apache.avro.specific.SpecificRe
     case 1: orderId = value$ != null ? value$.toString() : null; break;
     case 2: customerId = value$ != null ? value$.toString() : null; break;
     case 3: price = (java.lang.Long)value$; break;
-    case 4: paymentStatus = (java.lang.Integer)value$; break;
+    case 4: paymentStatus = value$ != null ? value$.toString() : null; break;
     case 5: createdAt = (java.lang.Long)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
@@ -212,7 +212,7 @@ public class PaymentRequestAvroModel extends org.apache.avro.specific.SpecificRe
    * Gets the value of the 'paymentStatus' field.
    * @return The value of the 'paymentStatus' field.
    */
-  public int getPaymentStatus() {
+  public java.lang.String getPaymentStatus() {
     return paymentStatus;
   }
 
@@ -221,7 +221,7 @@ public class PaymentRequestAvroModel extends org.apache.avro.specific.SpecificRe
    * Sets the value of the 'paymentStatus' field.
    * @param value the value to set.
    */
-  public void setPaymentStatus(int value) {
+  public void setPaymentStatus(java.lang.String value) {
     this.paymentStatus = value;
   }
 
@@ -287,7 +287,7 @@ public class PaymentRequestAvroModel extends org.apache.avro.specific.SpecificRe
     private java.lang.String orderId;
     private java.lang.String customerId;
     private long price;
-    private int paymentStatus;
+    private java.lang.String paymentStatus;
     private long createdAt;
 
     /** Creates a new Builder */
@@ -522,7 +522,7 @@ public class PaymentRequestAvroModel extends org.apache.avro.specific.SpecificRe
       * Gets the value of the 'paymentStatus' field.
       * @return The value.
       */
-    public int getPaymentStatus() {
+    public java.lang.String getPaymentStatus() {
       return paymentStatus;
     }
 
@@ -532,7 +532,7 @@ public class PaymentRequestAvroModel extends org.apache.avro.specific.SpecificRe
       * @param value The value of 'paymentStatus'.
       * @return This builder.
       */
-    public seungkyu.msa.service.kafka.model.PaymentRequestAvroModel.Builder setPaymentStatus(int value) {
+    public seungkyu.msa.service.kafka.model.PaymentRequestAvroModel.Builder setPaymentStatus(java.lang.String value) {
       validate(fields()[4], value);
       this.paymentStatus = value;
       fieldSetFlags()[4] = true;
@@ -553,6 +553,7 @@ public class PaymentRequestAvroModel extends org.apache.avro.specific.SpecificRe
       * @return This builder.
       */
     public seungkyu.msa.service.kafka.model.PaymentRequestAvroModel.Builder clearPaymentStatus() {
+      paymentStatus = null;
       fieldSetFlags()[4] = false;
       return this;
     }
@@ -605,7 +606,7 @@ public class PaymentRequestAvroModel extends org.apache.avro.specific.SpecificRe
         record.orderId = fieldSetFlags()[1] ? this.orderId : (java.lang.String) defaultValue(fields()[1]);
         record.customerId = fieldSetFlags()[2] ? this.customerId : (java.lang.String) defaultValue(fields()[2]);
         record.price = fieldSetFlags()[3] ? this.price : (java.lang.Long) defaultValue(fields()[3]);
-        record.paymentStatus = fieldSetFlags()[4] ? this.paymentStatus : (java.lang.Integer) defaultValue(fields()[4]);
+        record.paymentStatus = fieldSetFlags()[4] ? this.paymentStatus : (java.lang.String) defaultValue(fields()[4]);
         record.createdAt = fieldSetFlags()[5] ? this.createdAt : (java.lang.Long) defaultValue(fields()[5]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
@@ -647,7 +648,7 @@ public class PaymentRequestAvroModel extends org.apache.avro.specific.SpecificRe
 
     out.writeLong(this.price);
 
-    out.writeInt(this.paymentStatus);
+    out.writeString(this.paymentStatus);
 
     out.writeLong(this.createdAt);
 
@@ -666,7 +667,7 @@ public class PaymentRequestAvroModel extends org.apache.avro.specific.SpecificRe
 
       this.price = in.readLong();
 
-      this.paymentStatus = in.readInt();
+      this.paymentStatus = in.readString();
 
       this.createdAt = in.readLong();
 
@@ -690,7 +691,7 @@ public class PaymentRequestAvroModel extends org.apache.avro.specific.SpecificRe
           break;
 
         case 4:
-          this.paymentStatus = in.readInt();
+          this.paymentStatus = in.readString();
           break;
 
         case 5:

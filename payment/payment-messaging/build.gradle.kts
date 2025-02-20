@@ -16,6 +16,9 @@ dependencies {
     implementation(project(":common:common-domain"))
     implementation(project(":payment:payment-domain"))
 
+    implementation(project(":infrastructure:kafka"))
+    implementation("org.apache.avro:avro:1.12.0")
+
     //KAFKA
     implementation("io.projectreactor.kafka:reactor-kafka")
     implementation("org.springframework.kafka:spring-kafka")
