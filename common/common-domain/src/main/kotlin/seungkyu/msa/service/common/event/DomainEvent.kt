@@ -1,4 +1,4 @@
-package seungkyu.msa.service.common.event;
+package seungkyu.msa.service.common.event
 
-public interface DomainEvent<T> {
+interface DomainEvent<T> {
 }
