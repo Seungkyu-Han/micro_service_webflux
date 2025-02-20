@@ -1,0 +1,31 @@
+{
+  "namespace": "seungkyu.msa.service.kafka.model",
+  "type": "record",
+  "name": "RestaurantApprovalResponseAvroModel",
+  "fields": [
+
+    {
+      "name": "orderId",
+      "type": "string"
+    },
+
+    {
+      "name": "restaurantId",
+      "type": "string"
+    },
+
+    {
+      "name": "orderApprovalStatus",
+      "type": {
+        "type": "enum",
+        "name": "OrderApprovalStatus",
+        "symbols": ["APPROVED", "REJECTED"]
+      }
+    },
+
+    {
+      "name": "createdAt",
+      "type": "long"
+    }
+  ]
+}
