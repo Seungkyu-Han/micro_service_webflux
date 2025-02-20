@@ -4,6 +4,10 @@ package seungkyu.msa.service.common.valueObject
 value class Money(
     val amount: Long
 ){
+    companion object {
+        val ZERO = Money(0)
+    }
+
     fun isGreaterThanZero() = amount > 0
 
     fun isGreaterThan(money: Money) = this.amount >= money.amount
