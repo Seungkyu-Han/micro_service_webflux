@@ -6,7 +6,7 @@ import java.time.LocalDateTime
 data class RestaurantApprovalRequestDto(
     val restaurantId: String,
     val orderId: String,
-    val restaurantOrderStatus: RestaurantOrderStatus,
+    val restaurantOrderStatus: RestaurantOrderStatus = RestaurantOrderStatus.PAID,
     val products: HashMap<String, Int>,
     val price: Long,
     val createdAt: LocalDateTime
