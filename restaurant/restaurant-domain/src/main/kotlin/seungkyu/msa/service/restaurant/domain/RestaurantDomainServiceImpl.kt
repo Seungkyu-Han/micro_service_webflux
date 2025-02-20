@@ -2,9 +2,7 @@ package seungkyu.msa.service.restaurant.domain
 
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
-import seungkyu.msa.service.common.valueObject.ProductId
 import seungkyu.msa.service.restaurant.domain.entity.OrderDetail
-import seungkyu.msa.service.restaurant.domain.entity.Restaurant
 import seungkyu.msa.service.restaurant.domain.event.OrderApprovalEvent
 import seungkyu.msa.service.restaurant.domain.event.OrderApprovedEvent
 import seungkyu.msa.service.restaurant.domain.event.OrderRejectedEvent
