@@ -4,10 +4,9 @@ import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.kafka.core.reactive.ReactiveKafkaProducerTemplate
 import org.springframework.stereotype.Component
-import seungkyu.msa.service.kafka.model.PaymentCompletedResponseAvroModel
 import seungkyu.msa.service.kafka.model.PaymentFailedResponseAvroModel
 import seungkyu.msa.service.payment.domain.event.PaymentEvent
-import seungkyu.msa.service.payment.service.ports.output.message.publisher.PaymentCompletedMessagePublisher
+import seungkyu.msa.service.payment.service.ports.output.message.publisher.PaymentFailedMessagePublisher
 import java.time.ZoneOffset
 
 @Component
@@ -15,7 +14,7 @@ class PaymentFailedKafkaMessagePublisher(
     private val reactiveKafkaProducerTemplate: ReactiveKafkaProducerTemplate<String, PaymentFailedResponseAvroModel>,
     @Value("\${kafka.topic.payment-failed-response}")
     private val paymentFailedResponseTopic: String,
-): PaymentCompletedMessagePublisher {
+): PaymentFailedMessagePublisher {
 
     private val logger = LoggerFactory.getLogger(PaymentFailedKafkaMessagePublisher::class.java)
 

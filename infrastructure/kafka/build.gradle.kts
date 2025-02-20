@@ -1,7 +1,10 @@
 import com.github.davidmc24.gradle.plugin.avro.GenerateAvroJavaTask
 
 plugins {
-    kotlin("jvm")
+    kotlin("jvm") version "1.9.25"
+    kotlin("plugin.spring") version "1.9.25"
+    id("org.springframework.boot") version "3.4.2"
+    id("io.spring.dependency-management") version "1.1.7"
     id("com.github.davidmc24.gradle.plugin.avro") version "1.9.1"
 }
 
@@ -13,6 +16,12 @@ repositories {
 dependencies {
     testImplementation(kotlin("test"))
     implementation("org.apache.avro:avro:1.12.0")
+    implementation(project(":common:common-domain"))
+    implementation("org.springframework.boot:spring-boot-starter-webflux")
+    implementation("org.springframework.kafka:spring-kafka")
+    implementation("io.projectreactor.kafka:reactor-kafka")
+    implementation("io.confluent:kafka-avro-serializer:7.8.0")
+
 }
 
 tasks.test {
@@ -30,6 +39,6 @@ val generateAvro:TaskProvider<GenerateAvroJavaTask> = tasks.register("generateAv
     enableDecimalLogicalType = true
 }
 
-tasks.named("compileJava").configure {
-    dependsOn(generateAvro)
+tasks.named("compileKotlin") {
+    dependsOn("generateAvro")
 }
