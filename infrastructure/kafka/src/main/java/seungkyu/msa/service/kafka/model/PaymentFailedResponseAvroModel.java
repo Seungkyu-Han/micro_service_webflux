@@ -13,26 +13,26 @@ import org.apache.avro.message.BinaryMessageDecoder;
 import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
-public class PaymentCompletedResponseAvroModel extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -2098543159328940149L;
+public class PaymentFailedResponseAvroModel extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
+  private static final long serialVersionUID = 7665450724872989173L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"PaymentCompletedResponseAvroModel\",\"namespace\":\"seungkyu.msa.service.kafka.model\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"paymentId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"customerId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"orderId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"price\",\"type\":\"long\"},{\"name\":\"createdAt\",\"type\":\"long\"},{\"name\":\"failureMessages\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"PaymentFailedResponseAvroModel\",\"namespace\":\"seungkyu.msa.service.kafka.model\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"paymentId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"customerId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"orderId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"price\",\"type\":\"long\"},{\"name\":\"createdAt\",\"type\":\"long\"},{\"name\":\"failureMessages\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
 
-  private static final BinaryMessageEncoder<PaymentCompletedResponseAvroModel> ENCODER =
+  private static final BinaryMessageEncoder<PaymentFailedResponseAvroModel> ENCODER =
       new BinaryMessageEncoder<>(MODEL$, SCHEMA$);
 
-  private static final BinaryMessageDecoder<PaymentCompletedResponseAvroModel> DECODER =
+  private static final BinaryMessageDecoder<PaymentFailedResponseAvroModel> DECODER =
       new BinaryMessageDecoder<>(MODEL$, SCHEMA$);
 
   /**
    * Return the BinaryMessageEncoder instance used by this class.
    * @return the message encoder used by this class
    */
-  public static BinaryMessageEncoder<PaymentCompletedResponseAvroModel> getEncoder() {
+  public static BinaryMessageEncoder<PaymentFailedResponseAvroModel> getEncoder() {
     return ENCODER;
   }
 
@@ -40,7 +40,7 @@ public class PaymentCompletedResponseAvroModel extends org.apache.avro.specific.
    * Return the BinaryMessageDecoder instance used by this class.
    * @return the message decoder used by this class
    */
-  public static BinaryMessageDecoder<PaymentCompletedResponseAvroModel> getDecoder() {
+  public static BinaryMessageDecoder<PaymentFailedResponseAvroModel> getDecoder() {
     return DECODER;
   }
 
@@ -49,12 +49,12 @@ public class PaymentCompletedResponseAvroModel extends org.apache.avro.specific.
    * @param resolver a {@link SchemaStore} used to find schemas by fingerprint
    * @return a BinaryMessageDecoder instance for this class backed by the given SchemaStore
    */
-  public static BinaryMessageDecoder<PaymentCompletedResponseAvroModel> createDecoder(SchemaStore resolver) {
+  public static BinaryMessageDecoder<PaymentFailedResponseAvroModel> createDecoder(SchemaStore resolver) {
     return new BinaryMessageDecoder<>(MODEL$, SCHEMA$, resolver);
   }
 
   /**
-   * Serializes this PaymentCompletedResponseAvroModel to a ByteBuffer.
+   * Serializes this PaymentFailedResponseAvroModel to a ByteBuffer.
    * @return a buffer holding the serialized data for this instance
    * @throws java.io.IOException if this instance could not be serialized
    */
@@ -63,12 +63,12 @@ public class PaymentCompletedResponseAvroModel extends org.apache.avro.specific.
   }
 
   /**
-   * Deserializes a PaymentCompletedResponseAvroModel from a ByteBuffer.
+   * Deserializes a PaymentFailedResponseAvroModel from a ByteBuffer.
    * @param b a byte buffer holding serialized data for an instance of this class
-   * @return a PaymentCompletedResponseAvroModel instance decoded from the given buffer
+   * @return a PaymentFailedResponseAvroModel instance decoded from the given buffer
    * @throws java.io.IOException if the given bytes could not be deserialized into an instance of this class
    */
-  public static PaymentCompletedResponseAvroModel fromByteBuffer(
+  public static PaymentFailedResponseAvroModel fromByteBuffer(
       java.nio.ByteBuffer b) throws java.io.IOException {
     return DECODER.decode(b);
   }
@@ -86,7 +86,7 @@ public class PaymentCompletedResponseAvroModel extends org.apache.avro.specific.
    * to their default values from the schema.  If that is desired then
    * one should use <code>newBuilder()</code>.
    */
-  public PaymentCompletedResponseAvroModel() {}
+  public PaymentFailedResponseAvroModel() {}
 
   /**
    * All-args constructor.
@@ -98,7 +98,7 @@ public class PaymentCompletedResponseAvroModel extends org.apache.avro.specific.
    * @param createdAt The new value for createdAt
    * @param failureMessages The new value for failureMessages
    */
-  public PaymentCompletedResponseAvroModel(java.lang.String id, java.lang.String paymentId, java.lang.String customerId, java.lang.String orderId, java.lang.Long price, java.lang.Long createdAt, java.util.List<java.lang.String> failureMessages) {
+  public PaymentFailedResponseAvroModel(java.lang.String id, java.lang.String paymentId, java.lang.String customerId, java.lang.String orderId, java.lang.Long price, java.lang.Long createdAt, java.util.List<java.lang.String> failureMessages) {
     this.id = id;
     this.paymentId = paymentId;
     this.customerId = customerId;
@@ -265,45 +265,45 @@ public class PaymentCompletedResponseAvroModel extends org.apache.avro.specific.
   }
 
   /**
-   * Creates a new PaymentCompletedResponseAvroModel RecordBuilder.
-   * @return A new PaymentCompletedResponseAvroModel RecordBuilder
+   * Creates a new PaymentFailedResponseAvroModel RecordBuilder.
+   * @return A new PaymentFailedResponseAvroModel RecordBuilder
    */
-  public static seungkyu.msa.service.kafka.model.PaymentCompletedResponseAvroModel.Builder newBuilder() {
-    return new seungkyu.msa.service.kafka.model.PaymentCompletedResponseAvroModel.Builder();
+  public static seungkyu.msa.service.kafka.model.PaymentFailedResponseAvroModel.Builder newBuilder() {
+    return new seungkyu.msa.service.kafka.model.PaymentFailedResponseAvroModel.Builder();
   }
 
   /**
-   * Creates a new PaymentCompletedResponseAvroModel RecordBuilder by copying an existing Builder.
+   * Creates a new PaymentFailedResponseAvroModel RecordBuilder by copying an existing Builder.
    * @param other The existing builder to copy.
-   * @return A new PaymentCompletedResponseAvroModel RecordBuilder
+   * @return A new PaymentFailedResponseAvroModel RecordBuilder
    */
-  public static seungkyu.msa.service.kafka.model.PaymentCompletedResponseAvroModel.Builder newBuilder(seungkyu.msa.service.kafka.model.PaymentCompletedResponseAvroModel.Builder other) {
+  public static seungkyu.msa.service.kafka.model.PaymentFailedResponseAvroModel.Builder newBuilder(seungkyu.msa.service.kafka.model.PaymentFailedResponseAvroModel.Builder other) {
     if (other == null) {
-      return new seungkyu.msa.service.kafka.model.PaymentCompletedResponseAvroModel.Builder();
+      return new seungkyu.msa.service.kafka.model.PaymentFailedResponseAvroModel.Builder();
     } else {
-      return new seungkyu.msa.service.kafka.model.PaymentCompletedResponseAvroModel.Builder(other);
+      return new seungkyu.msa.service.kafka.model.PaymentFailedResponseAvroModel.Builder(other);
     }
   }
 
   /**
-   * Creates a new PaymentCompletedResponseAvroModel RecordBuilder by copying an existing PaymentCompletedResponseAvroModel instance.
+   * Creates a new PaymentFailedResponseAvroModel RecordBuilder by copying an existing PaymentFailedResponseAvroModel instance.
    * @param other The existing instance to copy.
-   * @return A new PaymentCompletedResponseAvroModel RecordBuilder
+   * @return A new PaymentFailedResponseAvroModel RecordBuilder
    */
-  public static seungkyu.msa.service.kafka.model.PaymentCompletedResponseAvroModel.Builder newBuilder(seungkyu.msa.service.kafka.model.PaymentCompletedResponseAvroModel other) {
+  public static seungkyu.msa.service.kafka.model.PaymentFailedResponseAvroModel.Builder newBuilder(seungkyu.msa.service.kafka.model.PaymentFailedResponseAvroModel other) {
     if (other == null) {
-      return new seungkyu.msa.service.kafka.model.PaymentCompletedResponseAvroModel.Builder();
+      return new seungkyu.msa.service.kafka.model.PaymentFailedResponseAvroModel.Builder();
     } else {
-      return new seungkyu.msa.service.kafka.model.PaymentCompletedResponseAvroModel.Builder(other);
+      return new seungkyu.msa.service.kafka.model.PaymentFailedResponseAvroModel.Builder(other);
     }
   }
 
   /**
-   * RecordBuilder for PaymentCompletedResponseAvroModel instances.
+   * RecordBuilder for PaymentFailedResponseAvroModel instances.
    */
   @org.apache.avro.specific.AvroGenerated
-  public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<PaymentCompletedResponseAvroModel>
-    implements org.apache.avro.data.RecordBuilder<PaymentCompletedResponseAvroModel> {
+  public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<PaymentFailedResponseAvroModel>
+    implements org.apache.avro.data.RecordBuilder<PaymentFailedResponseAvroModel> {
 
     private java.lang.String id;
     private java.lang.String paymentId;
@@ -322,7 +322,7 @@ public class PaymentCompletedResponseAvroModel extends org.apache.avro.specific.
      * Creates a Builder by copying an existing Builder.
      * @param other The existing Builder to copy.
      */
-    private Builder(seungkyu.msa.service.kafka.model.PaymentCompletedResponseAvroModel.Builder other) {
+    private Builder(seungkyu.msa.service.kafka.model.PaymentFailedResponseAvroModel.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.id)) {
         this.id = data().deepCopy(fields()[0].schema(), other.id);
@@ -355,10 +355,10 @@ public class PaymentCompletedResponseAvroModel extends org.apache.avro.specific.
     }
 
     /**
-     * Creates a Builder by copying an existing PaymentCompletedResponseAvroModel instance
+     * Creates a Builder by copying an existing PaymentFailedResponseAvroModel instance
      * @param other The existing instance to copy.
      */
-    private Builder(seungkyu.msa.service.kafka.model.PaymentCompletedResponseAvroModel other) {
+    private Builder(seungkyu.msa.service.kafka.model.PaymentFailedResponseAvroModel other) {
       super(SCHEMA$, MODEL$);
       if (isValidValue(fields()[0], other.id)) {
         this.id = data().deepCopy(fields()[0].schema(), other.id);
@@ -404,7 +404,7 @@ public class PaymentCompletedResponseAvroModel extends org.apache.avro.specific.
       * @param value The value of 'id'.
       * @return This builder.
       */
-    public seungkyu.msa.service.kafka.model.PaymentCompletedResponseAvroModel.Builder setId(java.lang.String value) {
+    public seungkyu.msa.service.kafka.model.PaymentFailedResponseAvroModel.Builder setId(java.lang.String value) {
       validate(fields()[0], value);
       this.id = value;
       fieldSetFlags()[0] = true;
@@ -424,7 +424,7 @@ public class PaymentCompletedResponseAvroModel extends org.apache.avro.specific.
       * Clears the value of the 'id' field.
       * @return This builder.
       */
-    public seungkyu.msa.service.kafka.model.PaymentCompletedResponseAvroModel.Builder clearId() {
+    public seungkyu.msa.service.kafka.model.PaymentFailedResponseAvroModel.Builder clearId() {
       id = null;
       fieldSetFlags()[0] = false;
       return this;
@@ -444,7 +444,7 @@ public class PaymentCompletedResponseAvroModel extends org.apache.avro.specific.
       * @param value The value of 'paymentId'.
       * @return This builder.
       */
-    public seungkyu.msa.service.kafka.model.PaymentCompletedResponseAvroModel.Builder setPaymentId(java.lang.String value) {
+    public seungkyu.msa.service.kafka.model.PaymentFailedResponseAvroModel.Builder setPaymentId(java.lang.String value) {
       validate(fields()[1], value);
       this.paymentId = value;
       fieldSetFlags()[1] = true;
@@ -464,7 +464,7 @@ public class PaymentCompletedResponseAvroModel extends org.apache.avro.specific.
       * Clears the value of the 'paymentId' field.
       * @return This builder.
       */
-    public seungkyu.msa.service.kafka.model.PaymentCompletedResponseAvroModel.Builder clearPaymentId() {
+    public seungkyu.msa.service.kafka.model.PaymentFailedResponseAvroModel.Builder clearPaymentId() {
       paymentId = null;
       fieldSetFlags()[1] = false;
       return this;
@@ -484,7 +484,7 @@ public class PaymentCompletedResponseAvroModel extends org.apache.avro.specific.
       * @param value The value of 'customerId'.
       * @return This builder.
       */
-    public seungkyu.msa.service.kafka.model.PaymentCompletedResponseAvroModel.Builder setCustomerId(java.lang.String value) {
+    public seungkyu.msa.service.kafka.model.PaymentFailedResponseAvroModel.Builder setCustomerId(java.lang.String value) {
       validate(fields()[2], value);
       this.customerId = value;
       fieldSetFlags()[2] = true;
@@ -504,7 +504,7 @@ public class PaymentCompletedResponseAvroModel extends org.apache.avro.specific.
       * Clears the value of the 'customerId' field.
       * @return This builder.
       */
-    public seungkyu.msa.service.kafka.model.PaymentCompletedResponseAvroModel.Builder clearCustomerId() {
+    public seungkyu.msa.service.kafka.model.PaymentFailedResponseAvroModel.Builder clearCustomerId() {
       customerId = null;
       fieldSetFlags()[2] = false;
       return this;
@@ -524,7 +524,7 @@ public class PaymentCompletedResponseAvroModel extends org.apache.avro.specific.
       * @param value The value of 'orderId'.
       * @return This builder.
       */
-    public seungkyu.msa.service.kafka.model.PaymentCompletedResponseAvroModel.Builder setOrderId(java.lang.String value) {
+    public seungkyu.msa.service.kafka.model.PaymentFailedResponseAvroModel.Builder setOrderId(java.lang.String value) {
       validate(fields()[3], value);
       this.orderId = value;
       fieldSetFlags()[3] = true;
@@ -544,7 +544,7 @@ public class PaymentCompletedResponseAvroModel extends org.apache.avro.specific.
       * Clears the value of the 'orderId' field.
       * @return This builder.
       */
-    public seungkyu.msa.service.kafka.model.PaymentCompletedResponseAvroModel.Builder clearOrderId() {
+    public seungkyu.msa.service.kafka.model.PaymentFailedResponseAvroModel.Builder clearOrderId() {
       orderId = null;
       fieldSetFlags()[3] = false;
       return this;
@@ -564,7 +564,7 @@ public class PaymentCompletedResponseAvroModel extends org.apache.avro.specific.
       * @param value The value of 'price'.
       * @return This builder.
       */
-    public seungkyu.msa.service.kafka.model.PaymentCompletedResponseAvroModel.Builder setPrice(long value) {
+    public seungkyu.msa.service.kafka.model.PaymentFailedResponseAvroModel.Builder setPrice(long value) {
       validate(fields()[4], value);
       this.price = value;
       fieldSetFlags()[4] = true;
@@ -584,7 +584,7 @@ public class PaymentCompletedResponseAvroModel extends org.apache.avro.specific.
       * Clears the value of the 'price' field.
       * @return This builder.
       */
-    public seungkyu.msa.service.kafka.model.PaymentCompletedResponseAvroModel.Builder clearPrice() {
+    public seungkyu.msa.service.kafka.model.PaymentFailedResponseAvroModel.Builder clearPrice() {
       fieldSetFlags()[4] = false;
       return this;
     }
@@ -603,7 +603,7 @@ public class PaymentCompletedResponseAvroModel extends org.apache.avro.specific.
       * @param value The value of 'createdAt'.
       * @return This builder.
       */
-    public seungkyu.msa.service.kafka.model.PaymentCompletedResponseAvroModel.Builder setCreatedAt(long value) {
+    public seungkyu.msa.service.kafka.model.PaymentFailedResponseAvroModel.Builder setCreatedAt(long value) {
       validate(fields()[5], value);
       this.createdAt = value;
       fieldSetFlags()[5] = true;
@@ -623,7 +623,7 @@ public class PaymentCompletedResponseAvroModel extends org.apache.avro.specific.
       * Clears the value of the 'createdAt' field.
       * @return This builder.
       */
-    public seungkyu.msa.service.kafka.model.PaymentCompletedResponseAvroModel.Builder clearCreatedAt() {
+    public seungkyu.msa.service.kafka.model.PaymentFailedResponseAvroModel.Builder clearCreatedAt() {
       fieldSetFlags()[5] = false;
       return this;
     }
@@ -642,7 +642,7 @@ public class PaymentCompletedResponseAvroModel extends org.apache.avro.specific.
       * @param value The value of 'failureMessages'.
       * @return This builder.
       */
-    public seungkyu.msa.service.kafka.model.PaymentCompletedResponseAvroModel.Builder setFailureMessages(java.util.List<java.lang.String> value) {
+    public seungkyu.msa.service.kafka.model.PaymentFailedResponseAvroModel.Builder setFailureMessages(java.util.List<java.lang.String> value) {
       validate(fields()[6], value);
       this.failureMessages = value;
       fieldSetFlags()[6] = true;
@@ -662,7 +662,7 @@ public class PaymentCompletedResponseAvroModel extends org.apache.avro.specific.
       * Clears the value of the 'failureMessages' field.
       * @return This builder.
       */
-    public seungkyu.msa.service.kafka.model.PaymentCompletedResponseAvroModel.Builder clearFailureMessages() {
+    public seungkyu.msa.service.kafka.model.PaymentFailedResponseAvroModel.Builder clearFailureMessages() {
       failureMessages = null;
       fieldSetFlags()[6] = false;
       return this;
@@ -670,9 +670,9 @@ public class PaymentCompletedResponseAvroModel extends org.apache.avro.specific.
 
     @Override
     @SuppressWarnings("unchecked")
-    public PaymentCompletedResponseAvroModel build() {
+    public PaymentFailedResponseAvroModel build() {
       try {
-        PaymentCompletedResponseAvroModel record = new PaymentCompletedResponseAvroModel();
+        PaymentFailedResponseAvroModel record = new PaymentFailedResponseAvroModel();
         record.id = fieldSetFlags()[0] ? this.id : (java.lang.String) defaultValue(fields()[0]);
         record.paymentId = fieldSetFlags()[1] ? this.paymentId : (java.lang.String) defaultValue(fields()[1]);
         record.customerId = fieldSetFlags()[2] ? this.customerId : (java.lang.String) defaultValue(fields()[2]);
@@ -690,8 +690,8 @@ public class PaymentCompletedResponseAvroModel extends org.apache.avro.specific.
   }
 
   @SuppressWarnings("unchecked")
-  private static final org.apache.avro.io.DatumWriter<PaymentCompletedResponseAvroModel>
-    WRITER$ = (org.apache.avro.io.DatumWriter<PaymentCompletedResponseAvroModel>)MODEL$.createDatumWriter(SCHEMA$);
+  private static final org.apache.avro.io.DatumWriter<PaymentFailedResponseAvroModel>
+    WRITER$ = (org.apache.avro.io.DatumWriter<PaymentFailedResponseAvroModel>)MODEL$.createDatumWriter(SCHEMA$);
 
   @Override public void writeExternal(java.io.ObjectOutput out)
     throws java.io.IOException {
@@ -699,8 +699,8 @@ public class PaymentCompletedResponseAvroModel extends org.apache.avro.specific.
   }
 
   @SuppressWarnings("unchecked")
-  private static final org.apache.avro.io.DatumReader<PaymentCompletedResponseAvroModel>
-    READER$ = (org.apache.avro.io.DatumReader<PaymentCompletedResponseAvroModel>)MODEL$.createDatumReader(SCHEMA$);
+  private static final org.apache.avro.io.DatumReader<PaymentFailedResponseAvroModel>
+    READER$ = (org.apache.avro.io.DatumReader<PaymentFailedResponseAvroModel>)MODEL$.createDatumReader(SCHEMA$);
 
   @Override public void readExternal(java.io.ObjectInput in)
     throws java.io.IOException {

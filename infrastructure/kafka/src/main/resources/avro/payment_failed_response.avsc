@@ -1,7 +1,7 @@
 {
   "namespace": "seungkyu.msa.service.kafka.model",
   "type": "record",
-  "name": "PaymentCompletedResponseAvroModel",
+  "name": "PaymentFailedResponseAvroModel",
   "fields": [
     {
       "name": "id",

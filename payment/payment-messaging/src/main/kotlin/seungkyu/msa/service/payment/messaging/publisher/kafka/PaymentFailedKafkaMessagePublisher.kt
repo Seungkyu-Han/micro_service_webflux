@@ -5,36 +5,37 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.kafka.core.reactive.ReactiveKafkaProducerTemplate
 import org.springframework.stereotype.Component
 import seungkyu.msa.service.kafka.model.PaymentCompletedResponseAvroModel
+import seungkyu.msa.service.kafka.model.PaymentFailedResponseAvroModel
 import seungkyu.msa.service.payment.domain.event.PaymentEvent
 import seungkyu.msa.service.payment.service.ports.output.message.publisher.PaymentCompletedMessagePublisher
 import java.time.ZoneOffset
 
 @Component
-class PaymentCompletedKafkaMessagePublisher(
-    private val reactiveKafkaProducerTemplate: ReactiveKafkaProducerTemplate<String, PaymentCompletedResponseAvroModel>,
-    @Value("\${kafka.topic.payment-completed-response}")
-    private val paymentCompletedResponseTopic: String,
+class PaymentFailedKafkaMessagePublisher(
+    private val reactiveKafkaProducerTemplate: ReactiveKafkaProducerTemplate<String, PaymentFailedResponseAvroModel>,
+    @Value("\${kafka.topic.payment-failed-response}")
+    private val paymentFailedResponseTopic: String,
 ): PaymentCompletedMessagePublisher {
 
-    private val logger = LoggerFactory.getLogger(PaymentCompletedKafkaMessagePublisher::class.java)
+    private val logger = LoggerFactory.getLogger(PaymentFailedKafkaMessagePublisher::class.java)
 
     override fun publish(domainEvent: PaymentEvent) {
 
-        logger.info("주문: {}의 결제 완료 이벤트를 전송하겠습니다", domainEvent.payment.orderId.id.toString())
+        logger.info("주문: {}의 결제 실패 이벤트를 전송하겠습니다", domainEvent.payment.orderId.id.toString())
 
-        val paymentCompletedResponseAvroModel = paymentCompletedEventToPaymentCompletedResponseAvroModel(domainEvent)
-
+        val paymentCompletedResponseAvroModel = paymentFailedEventToPaymentFailedResponseAvroModel(domainEvent)
+        
         reactiveKafkaProducerTemplate.send(
-            paymentCompletedResponseTopic,
+            paymentFailedResponseTopic,
             domainEvent.payment.orderId.id.toString(),
             paymentCompletedResponseAvroModel
         ).subscribe()
     }
 
-    private fun paymentCompletedEventToPaymentCompletedResponseAvroModel(
+    private fun paymentFailedEventToPaymentFailedResponseAvroModel(
         paymentEvent: PaymentEvent
-    ): PaymentCompletedResponseAvroModel {
-        return PaymentCompletedResponseAvroModel.newBuilder()
+    ): PaymentFailedResponseAvroModel {
+        return PaymentFailedResponseAvroModel.newBuilder()
             .setPaymentId(paymentEvent.payment.id.id.toString())
             .setCustomerId(paymentEvent.payment.customerId.id.toString())
             .setOrderId(paymentEvent.payment.orderId.id.toString())
