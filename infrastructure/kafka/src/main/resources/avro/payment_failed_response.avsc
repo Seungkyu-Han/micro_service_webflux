@@ -1,0 +1,46 @@
+{
+  "namespace": "seungkyu.msa.service.kafka.model",
+  "type": "record",
+  "name": "PaymentFailedResponseAvroModel",
+  "fields": [
+    {
+      "name": "id",
+      "type": "string"
+    },
+
+    {
+      "name": "paymentId",
+      "type": "string"
+    },
+
+    {
+      "name": "customerId",
+      "type": "string"
+    },
+
+    {
+      "name": "orderId",
+      "type": "string"
+    },
+
+    {
+      "name": "price",
+      "type": "long"
+    },
+
+    {
+      "name": "createdAt",
+      "type": "long"
+    },
+
+    {
+      "name": "failureMessages",
+      "type": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    }
+  ]
+}
