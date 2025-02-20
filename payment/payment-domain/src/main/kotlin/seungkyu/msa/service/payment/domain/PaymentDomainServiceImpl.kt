@@ -1,8 +1,10 @@
 package seungkyu.msa.service.payment.domain
 
+import org.bson.types.ObjectId
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 import seungkyu.msa.service.common.status.PaymentStatus
+import seungkyu.msa.service.common.valueObject.CustomerId
 import seungkyu.msa.service.common.valueObject.Money
 import seungkyu.msa.service.payment.domain.entity.Credit
 import seungkyu.msa.service.payment.domain.entity.Payment
@@ -70,5 +72,12 @@ class PaymentDomainServiceImpl: PaymentDomainService {
 
     private fun addCredit(credit: Credit, payment: Payment){
         credit.addCreditAmount(payment.price)
+    }
+
+    override fun createUser(id: ObjectId): Credit {
+        return Credit(
+            customerId = CustomerId(id),
+            totalCreditAmount = Money.ZERO
+        )
     }
 }

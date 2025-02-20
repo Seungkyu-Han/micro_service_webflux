@@ -6,4 +6,6 @@ import seungkyu.msa.service.payment.service.dto.DepositCommand
 interface PaymentApplicationService {
 
     fun createDeposit(depositCommand: DepositCommand): Mono<Void>
+
+    fun createUser(): Mono<Void>
 }

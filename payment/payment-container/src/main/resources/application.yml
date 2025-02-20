@@ -15,3 +15,6 @@ kafka:
 
   consumer:
     payment-consumer-group-id: payment_consumer_group
+
+server:
+  port: 12041

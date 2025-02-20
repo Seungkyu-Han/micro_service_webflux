@@ -21,4 +21,10 @@ class PaymentController(
             .thenReturn(ResponseEntity.ok().build())
     }
 
+    @PostMapping("/user")
+    fun createUser(): Mono<ResponseEntity<Void>> {
+        return paymentApplicationService.createUser()
+            .thenReturn(ResponseEntity.ok().build())
+    }
+
 }

@@ -1,4 +1,4 @@
-package seungkyu.msa.service.kafka.config
+package seungkyu.msa.service.restaurant.messaging.config
 
 import org.apache.kafka.clients.consumer.ConsumerConfig
 import org.apache.kafka.clients.producer.ProducerConfig
@@ -9,14 +9,15 @@ import org.springframework.kafka.core.reactive.ReactiveKafkaConsumerTemplate
 import org.springframework.kafka.core.reactive.ReactiveKafkaProducerTemplate
 import reactor.kafka.receiver.ReceiverOptions
 import reactor.kafka.sender.SenderOptions
-import seungkyu.msa.service.kafka.model.PaymentCompletedResponseAvroModel
+import seungkyu.msa.service.kafka.model.RestaurantApprovalResponseAvroModel
+
 
 @Configuration
 @EnableKafka
 class KafkaConfig {
 
     @Bean
-    fun reactiveKafkaProducerTemplate(): ReactiveKafkaProducerTemplate<String, PaymentCompletedResponseAvroModel> =
+    fun reactiveKafkaRestaurantApprovalResponseAvroModelProducerTemplate(): ReactiveKafkaProducerTemplate<String, RestaurantApprovalResponseAvroModel> =
         ReactiveKafkaProducerTemplate(SenderOptions.create(HashMap<String, Any>().apply {
             put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092")
             put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, org.apache.kafka.common.serialization.StringSerializer::class)
