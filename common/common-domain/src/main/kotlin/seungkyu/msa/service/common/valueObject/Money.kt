@@ -12,7 +12,7 @@ value class Money(
 
     fun isGreaterThan(money: Money) = this.amount >= money.amount
 
-    operator fun plus(other: Money):Money = Money(this.amount - other.amount)
+    operator fun plus(other: Money):Money = Money(this.amount + other.amount)
 
     operator fun minus(other: Money):Money = Money(this.amount - other.amount)
 

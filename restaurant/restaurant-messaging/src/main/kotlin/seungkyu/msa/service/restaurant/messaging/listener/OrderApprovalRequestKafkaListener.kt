@@ -22,7 +22,7 @@ class OrderApprovalRequestKafkaListener(
     private val logger = LoggerFactory.getLogger(OrderApprovalRequestKafkaListener::class.java)
 
     @KafkaListener(id = "\${kafka.consumer.restaurant-consumer-group-id}",
-        topics = ["\${kafka.topic.restaurant-approval-request}"])
+        topics = ["\${kafka.topic.order-approval-request}"])
     override fun receive(
         @Payload values: List<RestaurantApprovalRequestAvroModel>,
         @Header(KafkaHeaders.RECEIVED_KEY) keys: List<String>,
