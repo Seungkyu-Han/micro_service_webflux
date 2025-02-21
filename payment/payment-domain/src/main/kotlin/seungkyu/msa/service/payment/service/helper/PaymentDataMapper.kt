@@ -14,7 +14,7 @@ class PaymentDataMapper {
 
     fun paymentRequestDtoToPayment(paymentRequestDto: PaymentRequestDto): Payment {
         return Payment(
-            orderId = OrderId(id = ObjectId(paymentRequestDto.orderId)),
+            id = OrderId(id = ObjectId(paymentRequestDto.id)),
             customerId = CustomerId(id = ObjectId(paymentRequestDto.customerId)),
             price = Money(paymentRequestDto.price),
             paymentStatus = PaymentStatus.UNKNOWN

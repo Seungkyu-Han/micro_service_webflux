@@ -5,7 +5,6 @@ import java.time.LocalDateTime
 
 data class PaymentRequestDto(
     val id: String,
-    val orderId: String,
     val customerId: String,
     val price: Long,
     val createdAt: LocalDateTime,
