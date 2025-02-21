@@ -4,6 +4,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.kafka.core.reactive.ReactiveKafkaProducerTemplate
 import org.springframework.stereotype.Component
+import seungkyu.msa.service.kafka.model.Product
 import seungkyu.msa.service.kafka.model.RestaurantApprovalRequestAvroModel
 import seungkyu.msa.service.kafka.model.RestaurantOrderStatus
 import seungkyu.msa.service.order.domain.event.OrderPaidEvent
@@ -39,8 +40,12 @@ class OrderPaidRestaurantRequestKafkaPublisher(
             .setPrice(orderPaidEvent.order.price.amount)
             .setCreatedAt(orderPaidEvent.createdAt.toEpochSecond(ZoneOffset.UTC))
             .setProducts(
-                orderPaidEvent.order.orderItems
-                    .associate { it.productId.id.toString() to it.quantity }
+                orderPaidEvent.order.orderItems.map{
+                    Product.newBuilder()
+                        .setProductId(it.productId.id.toString())
+                        .setQuantity(it.quantity)
+                        .build()
+                }
             )
             .build()
     }

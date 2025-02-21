@@ -17,6 +17,17 @@ import seungkyu.msa.service.kafka.model.RestaurantApprovalResponseAvroModel
 class KafkaConfig {
 
     @Bean
+    fun kafkaConsumerConfig(): Map<String, Any> {
+        return mapOf(
+            ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG to "localhost:9092",
+            ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG to org.apache.kafka.common.serialization.StringDeserializer::class.java,
+            ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG to io.confluent.kafka.serializers.KafkaAvroDeserializer::class.java,
+            "schema.registry.url" to "http://localhost:8081",
+            "specific.avro.reader" to true
+        )
+    }
+
+    @Bean
     fun reactiveKafkaRestaurantApprovalResponseAvroModelProducerTemplate(): ReactiveKafkaProducerTemplate<String, RestaurantApprovalResponseAvroModel> =
         ReactiveKafkaProducerTemplate(SenderOptions.create(HashMap<String, Any>().apply {
             put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092")
