@@ -26,6 +26,7 @@ kafka:
     order-completed-consumer-group-id: order_completed_consumer_group
     order-cancelled-consumer-group-id: order_cancelled_consumer_group
     order-failed-consumer-group-id: order_failed_consumer_group
+    order-approval-consumer-group-id: order_approval_consumer_group
 
 
 server:

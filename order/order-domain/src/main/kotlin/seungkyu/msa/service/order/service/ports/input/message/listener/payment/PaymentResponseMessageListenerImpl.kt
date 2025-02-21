@@ -15,7 +15,8 @@ class PaymentResponseMessageListenerImpl(
         orderPaymentSaga.process(paymentResponse)
             .map{
                 orderPaidRestaurantRequestMessagePublisher.publish(it)
-            }.subscribe()
+            }
+            .subscribe()
     }
 
     override fun paymentCancelled(paymentResponse: PaymentResponse) {

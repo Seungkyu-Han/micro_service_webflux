@@ -8,13 +8,15 @@ import seungkyu.msa.service.common.event.EmptyEvent
 import seungkyu.msa.service.order.domain.OrderDomainService
 import seungkyu.msa.service.order.domain.event.OrderPaidEvent
 import seungkyu.msa.service.order.service.dto.message.PaymentResponse
+import seungkyu.msa.service.order.service.ports.output.message.publisher.restaurantApproval.OrderPaidRestaurantRequestMessagePublisher
 import seungkyu.msa.service.order.service.ports.output.repository.OrderRepository
 import seungkyu.msa.service.saga.SagaStep
 
 @Component
 class OrderPaymentSaga(
     private val orderDomainService: OrderDomainService,
-    private val orderRepository: OrderRepository
+    private val orderRepository: OrderRepository,
+    private val orderPaidRestaurantRequestMessagePublisher: OrderPaidRestaurantRequestMessagePublisher
 ): SagaStep<PaymentResponse, OrderPaidEvent, EmptyEvent> {
 
     private val logger = LoggerFactory.getLogger(OrderPaymentSaga::class.java)

@@ -26,14 +26,14 @@ class PaymentCancelledResponseKafkaListener(
     override fun receive(
         @Payload values: List<PaymentCancelledResponseAvroModel>,
         @Header(KafkaHeaders.RECEIVED_KEY) keys: List<String>,
-        @Header(KafkaHeaders.PARTITION) partitions: List<Int>,
+        @Header(KafkaHeaders.RECEIVED_PARTITION) partitions: List<Int>,
         @Header(KafkaHeaders.OFFSET) offsets: List<Long>
     ) {
         logger.info("{}개의 결제 취소 응답이 {}키, {}파티션, {}오프셋과 전달되었습니다",
             values.size, keys.toString(), partitions.toString(), offsets.toString())
 
         values.forEach{
-            logger.info("{} 주문이 성공적으로 결제되었습니다", it.id.toString())
+            logger.info("{} 주문이 성공적 결제 취소되었습니다", it.id.toString())
             paymentResponseMessageListener.paymentCancelled(
                 paymentCompletedResponseAvroModelToPaymentResponse(it)
             )

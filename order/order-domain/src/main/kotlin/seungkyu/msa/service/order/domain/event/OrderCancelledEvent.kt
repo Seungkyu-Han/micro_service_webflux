@@ -7,4 +7,8 @@ import java.time.LocalDateTime
 data class OrderCancelledEvent(
     val order: Order,
     val createdAt: LocalDateTime = LocalDateTime.now(),
-): DomainEvent<Order>
+): DomainEvent<Order>{
+    override fun toString(): String {
+        return "OrderCancelledEvent(order=$order, createdAt=$createdAt)"
+    }
+}
