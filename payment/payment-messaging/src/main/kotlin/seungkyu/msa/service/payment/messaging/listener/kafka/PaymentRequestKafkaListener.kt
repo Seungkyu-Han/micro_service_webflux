@@ -53,7 +53,7 @@ class PaymentRequestKafkaListener(
             customerId = paymentRequestAvroModel.customerId,
             price = paymentRequestAvroModel.price,
             createdAt = LocalDateTime.ofEpochSecond(paymentRequestAvroModel.createdAt, 0, ZoneOffset.UTC),
-            paymentOrderStatus = PaymentOrderStatus.valueOf(paymentRequestAvroModel.paymentStatus)
+            paymentOrderStatus = PaymentOrderStatus.valueOf(paymentRequestAvroModel.paymentOrderStatus.name)
         )
     }
 }
