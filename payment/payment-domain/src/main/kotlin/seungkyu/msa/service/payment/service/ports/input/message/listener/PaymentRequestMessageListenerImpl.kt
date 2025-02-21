@@ -30,7 +30,7 @@ class PaymentRequestMessageListenerImpl(
                 else
                     paymentFailedMessagePublisher.publish(paymentEvent)
             }.doOnNext{
-                logger.info("주문 :{}의 결제 :{} 이벤트가 전송되었습니다", it.payment.orderId.id, it.payment.id.id)
+                logger.info("주문 :{}의 결제 이벤트가 전송되었습니다", it.payment.id.id)
             }
             .then()
 
@@ -44,7 +44,7 @@ class PaymentRequestMessageListenerImpl(
                 else
                     paymentFailedMessagePublisher.publish(paymentEvent)
             }.doOnNext{
-                logger.info("주문 :{}의 결제취소 :{} 이벤트가 전송되었습니다", it.payment.orderId.id, it.payment.id.id)
+                logger.info("주문 :{}의 결제취소 이벤트가 전송되었습니다", it.payment.id.id)
             }
             .then()
 

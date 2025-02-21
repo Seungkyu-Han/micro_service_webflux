@@ -11,7 +11,6 @@ data class PaymentEntity(
     @Id
     val id: ObjectId = ObjectId.get(),
     val customerId: ObjectId,
-    val orderId: ObjectId,
     val price: Long,
     val paymentStatus: PaymentStatus,
     val createdAt: LocalDateTime = LocalDateTime.now(),

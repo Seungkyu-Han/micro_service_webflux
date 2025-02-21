@@ -36,10 +36,10 @@ class PaymentRequestKafkaListener(
             paymentRequestAvroModel ->
             val paymentRequestDto = paymentRequestAvroModelToPaymentRequestDto(paymentRequestAvroModel)
             if(paymentRequestDto.paymentOrderStatus == PaymentOrderStatus.PENDING){
-                logger.info("주문 {}의 결제가 진행 중입니다", paymentRequestDto.orderId)
+                logger.info("주문 {}의 결제가 진행 중입니다", paymentRequestDto.id)
                 paymentRequestMessageListener.completePayment(paymentRequestDto)
             }else{
-                logger.info("주문 {}의 결제가 취소 중입니다", paymentRequestDto.orderId)
+                logger.info("주문 {}의 결제가 취소 중입니다", paymentRequestDto.id)
                 paymentRequestMessageListener.cancelPayment(paymentRequestDto)
             }.subscribe()
         }
@@ -50,7 +50,6 @@ class PaymentRequestKafkaListener(
     ): PaymentRequestDto {
         return PaymentRequestDto(
             id = paymentRequestAvroModel.id,
-            orderId = paymentRequestAvroModel.orderId,
             customerId = paymentRequestAvroModel.customerId,
             price = paymentRequestAvroModel.price,
             createdAt = LocalDateTime.ofEpochSecond(paymentRequestAvroModel.createdAt, 0, ZoneOffset.UTC),
