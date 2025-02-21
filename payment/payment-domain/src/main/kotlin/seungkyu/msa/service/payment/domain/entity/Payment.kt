@@ -4,12 +4,10 @@ import seungkyu.msa.service.common.status.PaymentStatus
 import seungkyu.msa.service.common.valueObject.CustomerId
 import seungkyu.msa.service.common.valueObject.Money
 import seungkyu.msa.service.common.valueObject.OrderId
-import seungkyu.msa.service.common.valueObject.PaymentId
 import java.time.LocalDateTime
 
 class Payment(
-    val id: PaymentId = PaymentId(),
-    val orderId: OrderId,
+    val id: OrderId,
     val customerId: CustomerId,
     val price: Money,
     var paymentStatus: PaymentStatus,

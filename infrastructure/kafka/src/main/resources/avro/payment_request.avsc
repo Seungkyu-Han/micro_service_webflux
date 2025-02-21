@@ -10,11 +10,6 @@
     },
 
     {
-      "name": "orderId",
-      "type": "string"
-    },
-
-    {
       "name": "customerId",
       "type": "string"
     },
@@ -25,8 +20,12 @@
     },
 
     {
-      "name": "paymentStatus",
-      "type": "string"
+      "name": "paymentOrderStatus",
+      "type": {
+        "type": "enum",
+        "name": "PaymentOrderStatus",
+        "symbols": ["PENDING", "CANCELLED"]
+      }
     },
 
     {

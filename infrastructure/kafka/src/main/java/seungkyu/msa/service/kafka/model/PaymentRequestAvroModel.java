@@ -14,10 +14,10 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class PaymentRequestAvroModel extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 3369829044590829111L;
+  private static final long serialVersionUID = -3705794533636491975L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"PaymentRequestAvroModel\",\"namespace\":\"seungkyu.msa.service.kafka.model\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"orderId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"customerId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"price\",\"type\":\"long\"},{\"name\":\"paymentStatus\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"createdAt\",\"type\":\"long\"}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"PaymentRequestAvroModel\",\"namespace\":\"seungkyu.msa.service.kafka.model\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"customerId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"price\",\"type\":\"long\"},{\"name\":\"paymentOrderStatus\",\"type\":{\"type\":\"enum\",\"name\":\"PaymentOrderStatus\",\"symbols\":[\"PENDING\",\"CANCELLED\"]}},{\"name\":\"createdAt\",\"type\":\"long\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -74,10 +74,9 @@ public class PaymentRequestAvroModel extends org.apache.avro.specific.SpecificRe
   }
 
   private java.lang.String id;
-  private java.lang.String orderId;
   private java.lang.String customerId;
   private long price;
-  private java.lang.String paymentStatus;
+  private seungkyu.msa.service.kafka.model.PaymentOrderStatus paymentOrderStatus;
   private long createdAt;
 
   /**
@@ -90,18 +89,16 @@ public class PaymentRequestAvroModel extends org.apache.avro.specific.SpecificRe
   /**
    * All-args constructor.
    * @param id The new value for id
-   * @param orderId The new value for orderId
    * @param customerId The new value for customerId
    * @param price The new value for price
-   * @param paymentStatus The new value for paymentStatus
+   * @param paymentOrderStatus The new value for paymentOrderStatus
    * @param createdAt The new value for createdAt
    */
-  public PaymentRequestAvroModel(java.lang.String id, java.lang.String orderId, java.lang.String customerId, java.lang.Long price, java.lang.String paymentStatus, java.lang.Long createdAt) {
+  public PaymentRequestAvroModel(java.lang.String id, java.lang.String customerId, java.lang.Long price, seungkyu.msa.service.kafka.model.PaymentOrderStatus paymentOrderStatus, java.lang.Long createdAt) {
     this.id = id;
-    this.orderId = orderId;
     this.customerId = customerId;
     this.price = price;
-    this.paymentStatus = paymentStatus;
+    this.paymentOrderStatus = paymentOrderStatus;
     this.createdAt = createdAt;
   }
 
@@ -116,11 +113,10 @@ public class PaymentRequestAvroModel extends org.apache.avro.specific.SpecificRe
   public java.lang.Object get(int field$) {
     switch (field$) {
     case 0: return id;
-    case 1: return orderId;
-    case 2: return customerId;
-    case 3: return price;
-    case 4: return paymentStatus;
-    case 5: return createdAt;
+    case 1: return customerId;
+    case 2: return price;
+    case 3: return paymentOrderStatus;
+    case 4: return createdAt;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -131,11 +127,10 @@ public class PaymentRequestAvroModel extends org.apache.avro.specific.SpecificRe
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
     case 0: id = value$ != null ? value$.toString() : null; break;
-    case 1: orderId = value$ != null ? value$.toString() : null; break;
-    case 2: customerId = value$ != null ? value$.toString() : null; break;
-    case 3: price = (java.lang.Long)value$; break;
-    case 4: paymentStatus = value$ != null ? value$.toString() : null; break;
-    case 5: createdAt = (java.lang.Long)value$; break;
+    case 1: customerId = value$ != null ? value$.toString() : null; break;
+    case 2: price = (java.lang.Long)value$; break;
+    case 3: paymentOrderStatus = (seungkyu.msa.service.kafka.model.PaymentOrderStatus)value$; break;
+    case 4: createdAt = (java.lang.Long)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -155,23 +150,6 @@ public class PaymentRequestAvroModel extends org.apache.avro.specific.SpecificRe
    */
   public void setId(java.lang.String value) {
     this.id = value;
-  }
-
-  /**
-   * Gets the value of the 'orderId' field.
-   * @return The value of the 'orderId' field.
-   */
-  public java.lang.String getOrderId() {
-    return orderId;
-  }
-
-
-  /**
-   * Sets the value of the 'orderId' field.
-   * @param value the value to set.
-   */
-  public void setOrderId(java.lang.String value) {
-    this.orderId = value;
   }
 
   /**
@@ -209,20 +187,20 @@ public class PaymentRequestAvroModel extends org.apache.avro.specific.SpecificRe
   }
 
   /**
-   * Gets the value of the 'paymentStatus' field.
-   * @return The value of the 'paymentStatus' field.
+   * Gets the value of the 'paymentOrderStatus' field.
+   * @return The value of the 'paymentOrderStatus' field.
    */
-  public java.lang.String getPaymentStatus() {
-    return paymentStatus;
+  public seungkyu.msa.service.kafka.model.PaymentOrderStatus getPaymentOrderStatus() {
+    return paymentOrderStatus;
   }
 
 
   /**
-   * Sets the value of the 'paymentStatus' field.
+   * Sets the value of the 'paymentOrderStatus' field.
    * @param value the value to set.
    */
-  public void setPaymentStatus(java.lang.String value) {
-    this.paymentStatus = value;
+  public void setPaymentOrderStatus(seungkyu.msa.service.kafka.model.PaymentOrderStatus value) {
+    this.paymentOrderStatus = value;
   }
 
   /**
@@ -284,10 +262,9 @@ public class PaymentRequestAvroModel extends org.apache.avro.specific.SpecificRe
     implements org.apache.avro.data.RecordBuilder<PaymentRequestAvroModel> {
 
     private java.lang.String id;
-    private java.lang.String orderId;
     private java.lang.String customerId;
     private long price;
-    private java.lang.String paymentStatus;
+    private seungkyu.msa.service.kafka.model.PaymentOrderStatus paymentOrderStatus;
     private long createdAt;
 
     /** Creates a new Builder */
@@ -305,25 +282,21 @@ public class PaymentRequestAvroModel extends org.apache.avro.specific.SpecificRe
         this.id = data().deepCopy(fields()[0].schema(), other.id);
         fieldSetFlags()[0] = other.fieldSetFlags()[0];
       }
-      if (isValidValue(fields()[1], other.orderId)) {
-        this.orderId = data().deepCopy(fields()[1].schema(), other.orderId);
+      if (isValidValue(fields()[1], other.customerId)) {
+        this.customerId = data().deepCopy(fields()[1].schema(), other.customerId);
         fieldSetFlags()[1] = other.fieldSetFlags()[1];
       }
-      if (isValidValue(fields()[2], other.customerId)) {
-        this.customerId = data().deepCopy(fields()[2].schema(), other.customerId);
+      if (isValidValue(fields()[2], other.price)) {
+        this.price = data().deepCopy(fields()[2].schema(), other.price);
         fieldSetFlags()[2] = other.fieldSetFlags()[2];
       }
-      if (isValidValue(fields()[3], other.price)) {
-        this.price = data().deepCopy(fields()[3].schema(), other.price);
+      if (isValidValue(fields()[3], other.paymentOrderStatus)) {
+        this.paymentOrderStatus = data().deepCopy(fields()[3].schema(), other.paymentOrderStatus);
         fieldSetFlags()[3] = other.fieldSetFlags()[3];
       }
-      if (isValidValue(fields()[4], other.paymentStatus)) {
-        this.paymentStatus = data().deepCopy(fields()[4].schema(), other.paymentStatus);
+      if (isValidValue(fields()[4], other.createdAt)) {
+        this.createdAt = data().deepCopy(fields()[4].schema(), other.createdAt);
         fieldSetFlags()[4] = other.fieldSetFlags()[4];
-      }
-      if (isValidValue(fields()[5], other.createdAt)) {
-        this.createdAt = data().deepCopy(fields()[5].schema(), other.createdAt);
-        fieldSetFlags()[5] = other.fieldSetFlags()[5];
       }
     }
 
@@ -337,25 +310,21 @@ public class PaymentRequestAvroModel extends org.apache.avro.specific.SpecificRe
         this.id = data().deepCopy(fields()[0].schema(), other.id);
         fieldSetFlags()[0] = true;
       }
-      if (isValidValue(fields()[1], other.orderId)) {
-        this.orderId = data().deepCopy(fields()[1].schema(), other.orderId);
+      if (isValidValue(fields()[1], other.customerId)) {
+        this.customerId = data().deepCopy(fields()[1].schema(), other.customerId);
         fieldSetFlags()[1] = true;
       }
-      if (isValidValue(fields()[2], other.customerId)) {
-        this.customerId = data().deepCopy(fields()[2].schema(), other.customerId);
+      if (isValidValue(fields()[2], other.price)) {
+        this.price = data().deepCopy(fields()[2].schema(), other.price);
         fieldSetFlags()[2] = true;
       }
-      if (isValidValue(fields()[3], other.price)) {
-        this.price = data().deepCopy(fields()[3].schema(), other.price);
+      if (isValidValue(fields()[3], other.paymentOrderStatus)) {
+        this.paymentOrderStatus = data().deepCopy(fields()[3].schema(), other.paymentOrderStatus);
         fieldSetFlags()[3] = true;
       }
-      if (isValidValue(fields()[4], other.paymentStatus)) {
-        this.paymentStatus = data().deepCopy(fields()[4].schema(), other.paymentStatus);
+      if (isValidValue(fields()[4], other.createdAt)) {
+        this.createdAt = data().deepCopy(fields()[4].schema(), other.createdAt);
         fieldSetFlags()[4] = true;
-      }
-      if (isValidValue(fields()[5], other.createdAt)) {
-        this.createdAt = data().deepCopy(fields()[5].schema(), other.createdAt);
-        fieldSetFlags()[5] = true;
       }
     }
 
@@ -400,46 +369,6 @@ public class PaymentRequestAvroModel extends org.apache.avro.specific.SpecificRe
     }
 
     /**
-      * Gets the value of the 'orderId' field.
-      * @return The value.
-      */
-    public java.lang.String getOrderId() {
-      return orderId;
-    }
-
-
-    /**
-      * Sets the value of the 'orderId' field.
-      * @param value The value of 'orderId'.
-      * @return This builder.
-      */
-    public seungkyu.msa.service.kafka.model.PaymentRequestAvroModel.Builder setOrderId(java.lang.String value) {
-      validate(fields()[1], value);
-      this.orderId = value;
-      fieldSetFlags()[1] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'orderId' field has been set.
-      * @return True if the 'orderId' field has been set, false otherwise.
-      */
-    public boolean hasOrderId() {
-      return fieldSetFlags()[1];
-    }
-
-
-    /**
-      * Clears the value of the 'orderId' field.
-      * @return This builder.
-      */
-    public seungkyu.msa.service.kafka.model.PaymentRequestAvroModel.Builder clearOrderId() {
-      orderId = null;
-      fieldSetFlags()[1] = false;
-      return this;
-    }
-
-    /**
       * Gets the value of the 'customerId' field.
       * @return The value.
       */
@@ -454,9 +383,9 @@ public class PaymentRequestAvroModel extends org.apache.avro.specific.SpecificRe
       * @return This builder.
       */
     public seungkyu.msa.service.kafka.model.PaymentRequestAvroModel.Builder setCustomerId(java.lang.String value) {
-      validate(fields()[2], value);
+      validate(fields()[1], value);
       this.customerId = value;
-      fieldSetFlags()[2] = true;
+      fieldSetFlags()[1] = true;
       return this;
     }
 
@@ -465,7 +394,7 @@ public class PaymentRequestAvroModel extends org.apache.avro.specific.SpecificRe
       * @return True if the 'customerId' field has been set, false otherwise.
       */
     public boolean hasCustomerId() {
-      return fieldSetFlags()[2];
+      return fieldSetFlags()[1];
     }
 
 
@@ -475,7 +404,7 @@ public class PaymentRequestAvroModel extends org.apache.avro.specific.SpecificRe
       */
     public seungkyu.msa.service.kafka.model.PaymentRequestAvroModel.Builder clearCustomerId() {
       customerId = null;
-      fieldSetFlags()[2] = false;
+      fieldSetFlags()[1] = false;
       return this;
     }
 
@@ -494,9 +423,9 @@ public class PaymentRequestAvroModel extends org.apache.avro.specific.SpecificRe
       * @return This builder.
       */
     public seungkyu.msa.service.kafka.model.PaymentRequestAvroModel.Builder setPrice(long value) {
-      validate(fields()[3], value);
+      validate(fields()[2], value);
       this.price = value;
-      fieldSetFlags()[3] = true;
+      fieldSetFlags()[2] = true;
       return this;
     }
 
@@ -505,7 +434,7 @@ public class PaymentRequestAvroModel extends org.apache.avro.specific.SpecificRe
       * @return True if the 'price' field has been set, false otherwise.
       */
     public boolean hasPrice() {
-      return fieldSetFlags()[3];
+      return fieldSetFlags()[2];
     }
 
 
@@ -514,47 +443,47 @@ public class PaymentRequestAvroModel extends org.apache.avro.specific.SpecificRe
       * @return This builder.
       */
     public seungkyu.msa.service.kafka.model.PaymentRequestAvroModel.Builder clearPrice() {
-      fieldSetFlags()[3] = false;
+      fieldSetFlags()[2] = false;
       return this;
     }
 
     /**
-      * Gets the value of the 'paymentStatus' field.
+      * Gets the value of the 'paymentOrderStatus' field.
       * @return The value.
       */
-    public java.lang.String getPaymentStatus() {
-      return paymentStatus;
+    public seungkyu.msa.service.kafka.model.PaymentOrderStatus getPaymentOrderStatus() {
+      return paymentOrderStatus;
     }
 
 
     /**
-      * Sets the value of the 'paymentStatus' field.
-      * @param value The value of 'paymentStatus'.
+      * Sets the value of the 'paymentOrderStatus' field.
+      * @param value The value of 'paymentOrderStatus'.
       * @return This builder.
       */
-    public seungkyu.msa.service.kafka.model.PaymentRequestAvroModel.Builder setPaymentStatus(java.lang.String value) {
-      validate(fields()[4], value);
-      this.paymentStatus = value;
-      fieldSetFlags()[4] = true;
+    public seungkyu.msa.service.kafka.model.PaymentRequestAvroModel.Builder setPaymentOrderStatus(seungkyu.msa.service.kafka.model.PaymentOrderStatus value) {
+      validate(fields()[3], value);
+      this.paymentOrderStatus = value;
+      fieldSetFlags()[3] = true;
       return this;
     }
 
     /**
-      * Checks whether the 'paymentStatus' field has been set.
-      * @return True if the 'paymentStatus' field has been set, false otherwise.
+      * Checks whether the 'paymentOrderStatus' field has been set.
+      * @return True if the 'paymentOrderStatus' field has been set, false otherwise.
       */
-    public boolean hasPaymentStatus() {
-      return fieldSetFlags()[4];
+    public boolean hasPaymentOrderStatus() {
+      return fieldSetFlags()[3];
     }
 
 
     /**
-      * Clears the value of the 'paymentStatus' field.
+      * Clears the value of the 'paymentOrderStatus' field.
       * @return This builder.
       */
-    public seungkyu.msa.service.kafka.model.PaymentRequestAvroModel.Builder clearPaymentStatus() {
-      paymentStatus = null;
-      fieldSetFlags()[4] = false;
+    public seungkyu.msa.service.kafka.model.PaymentRequestAvroModel.Builder clearPaymentOrderStatus() {
+      paymentOrderStatus = null;
+      fieldSetFlags()[3] = false;
       return this;
     }
 
@@ -573,9 +502,9 @@ public class PaymentRequestAvroModel extends org.apache.avro.specific.SpecificRe
       * @return This builder.
       */
     public seungkyu.msa.service.kafka.model.PaymentRequestAvroModel.Builder setCreatedAt(long value) {
-      validate(fields()[5], value);
+      validate(fields()[4], value);
       this.createdAt = value;
-      fieldSetFlags()[5] = true;
+      fieldSetFlags()[4] = true;
       return this;
     }
 
@@ -584,7 +513,7 @@ public class PaymentRequestAvroModel extends org.apache.avro.specific.SpecificRe
       * @return True if the 'createdAt' field has been set, false otherwise.
       */
     public boolean hasCreatedAt() {
-      return fieldSetFlags()[5];
+      return fieldSetFlags()[4];
     }
 
 
@@ -593,7 +522,7 @@ public class PaymentRequestAvroModel extends org.apache.avro.specific.SpecificRe
       * @return This builder.
       */
     public seungkyu.msa.service.kafka.model.PaymentRequestAvroModel.Builder clearCreatedAt() {
-      fieldSetFlags()[5] = false;
+      fieldSetFlags()[4] = false;
       return this;
     }
 
@@ -603,11 +532,10 @@ public class PaymentRequestAvroModel extends org.apache.avro.specific.SpecificRe
       try {
         PaymentRequestAvroModel record = new PaymentRequestAvroModel();
         record.id = fieldSetFlags()[0] ? this.id : (java.lang.String) defaultValue(fields()[0]);
-        record.orderId = fieldSetFlags()[1] ? this.orderId : (java.lang.String) defaultValue(fields()[1]);
-        record.customerId = fieldSetFlags()[2] ? this.customerId : (java.lang.String) defaultValue(fields()[2]);
-        record.price = fieldSetFlags()[3] ? this.price : (java.lang.Long) defaultValue(fields()[3]);
-        record.paymentStatus = fieldSetFlags()[4] ? this.paymentStatus : (java.lang.String) defaultValue(fields()[4]);
-        record.createdAt = fieldSetFlags()[5] ? this.createdAt : (java.lang.Long) defaultValue(fields()[5]);
+        record.customerId = fieldSetFlags()[1] ? this.customerId : (java.lang.String) defaultValue(fields()[1]);
+        record.price = fieldSetFlags()[2] ? this.price : (java.lang.Long) defaultValue(fields()[2]);
+        record.paymentOrderStatus = fieldSetFlags()[3] ? this.paymentOrderStatus : (seungkyu.msa.service.kafka.model.PaymentOrderStatus) defaultValue(fields()[3]);
+        record.createdAt = fieldSetFlags()[4] ? this.createdAt : (java.lang.Long) defaultValue(fields()[4]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;
@@ -642,13 +570,11 @@ public class PaymentRequestAvroModel extends org.apache.avro.specific.SpecificRe
   {
     out.writeString(this.id);
 
-    out.writeString(this.orderId);
-
     out.writeString(this.customerId);
 
     out.writeLong(this.price);
 
-    out.writeString(this.paymentStatus);
+    out.writeEnum(this.paymentOrderStatus.ordinal());
 
     out.writeLong(this.createdAt);
 
@@ -661,40 +587,34 @@ public class PaymentRequestAvroModel extends org.apache.avro.specific.SpecificRe
     if (fieldOrder == null) {
       this.id = in.readString();
 
-      this.orderId = in.readString();
-
       this.customerId = in.readString();
 
       this.price = in.readLong();
 
-      this.paymentStatus = in.readString();
+      this.paymentOrderStatus = seungkyu.msa.service.kafka.model.PaymentOrderStatus.values()[in.readEnum()];
 
       this.createdAt = in.readLong();
 
     } else {
-      for (int i = 0; i < 6; i++) {
+      for (int i = 0; i < 5; i++) {
         switch (fieldOrder[i].pos()) {
         case 0:
           this.id = in.readString();
           break;
 
         case 1:
-          this.orderId = in.readString();
-          break;
-
-        case 2:
           this.customerId = in.readString();
           break;
 
-        case 3:
+        case 2:
           this.price = in.readLong();
           break;
 
-        case 4:
-          this.paymentStatus = in.readString();
+        case 3:
+          this.paymentOrderStatus = seungkyu.msa.service.kafka.model.PaymentOrderStatus.values()[in.readEnum()];
           break;
 
-        case 5:
+        case 4:
           this.createdAt = in.readLong();
           break;
 

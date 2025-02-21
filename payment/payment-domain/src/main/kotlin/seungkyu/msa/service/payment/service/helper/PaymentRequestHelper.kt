@@ -28,7 +28,7 @@ class PaymentRequestHelper(
 
     @Transactional
     fun persistPayment(paymentRequestDto: PaymentRequestDto): Mono<PaymentEvent>{
-        logger.info("주문 {}의 결제 완료 이벤트를 수신했습니다", paymentRequestDto.orderId)
+        logger.info("주문 {}의 결제 완료 이벤트를 수신했습니다", paymentRequestDto.id)
         val payment: Payment = paymentDataMapper.paymentRequestDtoToPayment(paymentRequestDto = paymentRequestDto)
         //고객의 잔액을 조회
         return getCredit(customerId = payment.customerId)
@@ -46,9 +46,9 @@ class PaymentRequestHelper(
 
     @Transactional
     fun persistCancelPayment(paymentRequestDto: PaymentRequestDto): Mono<PaymentEvent>{
-        logger.info("주문 {}의 취소 이벤트를 수신했습니다", paymentRequestDto.orderId)
+        logger.info("주문 {}의 취소 이벤트를 수신했습니다", paymentRequestDto.id)
         //해당 주문의 유무를 조회
-        return findPaymentByOrderId(orderId = ObjectId(paymentRequestDto.orderId))
+        return findPaymentByOrderId(orderId = ObjectId(paymentRequestDto.id))
             .flatMap{
                 payment ->
                 //해당 고객의 잔액을 조회

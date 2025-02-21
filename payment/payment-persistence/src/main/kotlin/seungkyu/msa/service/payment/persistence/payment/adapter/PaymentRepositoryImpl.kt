@@ -6,7 +6,6 @@ import reactor.core.publisher.Mono
 import seungkyu.msa.service.common.valueObject.CustomerId
 import seungkyu.msa.service.common.valueObject.Money
 import seungkyu.msa.service.common.valueObject.OrderId
-import seungkyu.msa.service.common.valueObject.PaymentId
 import seungkyu.msa.service.payment.domain.entity.Payment
 import seungkyu.msa.service.payment.persistence.payment.entity.PaymentEntity
 import seungkyu.msa.service.payment.persistence.payment.repository.PaymentMongoRepository
@@ -28,8 +27,7 @@ class PaymentRepositoryImpl(
 
     private fun paymentEntityToPayment(paymentEntity: PaymentEntity): Payment {
         return Payment(
-            id = PaymentId(paymentEntity.id),
-            orderId = OrderId(paymentEntity.orderId),
+            id = OrderId(paymentEntity.id),
             customerId = CustomerId(paymentEntity.customerId),
             price = Money(paymentEntity.price),
             paymentStatus = paymentEntity.paymentStatus,
@@ -41,7 +39,6 @@ class PaymentRepositoryImpl(
         return PaymentEntity(
             id = payment.id.id,
             customerId = payment.customerId.id,
-            orderId = payment.orderId.id,
             price = payment.price.amount,
             paymentStatus = payment.paymentStatus,
             createdAt = payment.createdAt,
