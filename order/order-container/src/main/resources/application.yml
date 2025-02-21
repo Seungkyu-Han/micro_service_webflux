@@ -1,0 +1,20 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://seungkyu:1204@localhost:27017/msa?authSource=admin
+  kafka:
+    bootstrap-servers: localhost:9092
+
+
+kafka:
+  topic:
+    payment-request: payment_request_topic
+    order-approval-response: order_approval_response_topic
+
+
+  consumer:
+    restaurant-consumer-group-id: restaurant_consumer_group
+
+
+server:
+  port: 12040
