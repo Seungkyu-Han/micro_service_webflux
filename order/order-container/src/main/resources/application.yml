@@ -4,6 +4,8 @@ spring:
       uri: mongodb://seungkyu:1204@localhost:27017/msa?authSource=admin
   kafka:
     bootstrap-servers: localhost:9092
+    properties:
+      schema.registry.url: http://localhost:8081
 
 
 kafka:

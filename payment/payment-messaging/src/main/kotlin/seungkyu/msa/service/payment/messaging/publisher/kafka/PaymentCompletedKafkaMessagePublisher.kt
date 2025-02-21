@@ -20,13 +20,13 @@ class PaymentCompletedKafkaMessagePublisher(
 
     override fun publish(domainEvent: PaymentEvent) {
 
-        logger.info("주문: {}의 결제 완료 이벤트를 전송하겠습니다", domainEvent.payment.orderId.id.toString())
+        logger.info("주문: {}의 결제 완료 이벤트를 전송하겠습니다", domainEvent.payment.id.id.toString())
 
         val paymentCompletedResponseAvroModel = paymentCompletedEventToPaymentCompletedResponseAvroModel(domainEvent)
 
         reactiveKafkaProducerTemplate.send(
             paymentCompletedResponseTopic,
-            domainEvent.payment.orderId.id.toString(),
+            domainEvent.payment.id.id.toString(),
             paymentCompletedResponseAvroModel
         ).subscribe()
     }
@@ -37,7 +37,7 @@ class PaymentCompletedKafkaMessagePublisher(
         return PaymentCompletedResponseAvroModel.newBuilder()
             .setPaymentId(paymentEvent.payment.id.id.toString())
             .setCustomerId(paymentEvent.payment.customerId.id.toString())
-            .setOrderId(paymentEvent.payment.orderId.id.toString())
+            .setId(paymentEvent.payment.id.id.toString())
             .setPrice(paymentEvent.payment.price.amount)
             .setCreatedAt(paymentEvent.createdAt.toEpochSecond(ZoneOffset.UTC))
             .setFailureMessages(paymentEvent.failureMessages)

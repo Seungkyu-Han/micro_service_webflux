@@ -16,7 +16,8 @@ class KafkaConfig {
     fun reactiveKafkaPaymentRequestAvroModelProducerTemplate(): ReactiveKafkaProducerTemplate<String, PaymentRequestAvroModel> =
         ReactiveKafkaProducerTemplate(SenderOptions.create(HashMap<String, Any>().apply {
             put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092")
-            put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, org.apache.kafka.common.serialization.StringSerializer::class)
-            put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, io.confluent.kafka.serializers.KafkaAvroSerializer::class)
+            put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, org.apache.kafka.common.serialization.StringSerializer::class.java)
+            put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, io.confluent.kafka.serializers.KafkaAvroSerializer::class.java)
+            put("schema.registry.url", "http://localhost:8081")
         }))
 }

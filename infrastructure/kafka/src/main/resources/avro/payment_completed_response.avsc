@@ -19,11 +19,6 @@
     },
 
     {
-      "name": "orderId",
-      "type": "string"
-    },
-
-    {
       "name": "price",
       "type": "long"
     },

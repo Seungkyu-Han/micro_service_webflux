@@ -37,7 +37,7 @@ class PaymentFailedKafkaMessagePublisher(
         return PaymentFailedResponseAvroModel.newBuilder()
             .setPaymentId(paymentEvent.payment.id.id.toString())
             .setCustomerId(paymentEvent.payment.customerId.id.toString())
-            .setOrderId(paymentEvent.payment.id.id.toString())
+            .setId(paymentEvent.payment.id.id.toString())
             .setPrice(paymentEvent.payment.price.amount)
             .setCreatedAt(paymentEvent.createdAt.toEpochSecond(ZoneOffset.UTC))
             .setFailureMessages(paymentEvent.failureMessages)

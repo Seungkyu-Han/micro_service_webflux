@@ -14,10 +14,10 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class PaymentFailedResponseAvroModel extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 7665450724872989173L;
+  private static final long serialVersionUID = 8664667388489780644L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"PaymentFailedResponseAvroModel\",\"namespace\":\"seungkyu.msa.service.kafka.model\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"paymentId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"customerId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"orderId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"price\",\"type\":\"long\"},{\"name\":\"createdAt\",\"type\":\"long\"},{\"name\":\"failureMessages\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"PaymentFailedResponseAvroModel\",\"namespace\":\"seungkyu.msa.service.kafka.model\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"paymentId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"customerId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"price\",\"type\":\"long\"},{\"name\":\"createdAt\",\"type\":\"long\"},{\"name\":\"failureMessages\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -76,7 +76,6 @@ public class PaymentFailedResponseAvroModel extends org.apache.avro.specific.Spe
   private java.lang.String id;
   private java.lang.String paymentId;
   private java.lang.String customerId;
-  private java.lang.String orderId;
   private long price;
   private long createdAt;
   private java.util.List<java.lang.String> failureMessages;
@@ -93,16 +92,14 @@ public class PaymentFailedResponseAvroModel extends org.apache.avro.specific.Spe
    * @param id The new value for id
    * @param paymentId The new value for paymentId
    * @param customerId The new value for customerId
-   * @param orderId The new value for orderId
    * @param price The new value for price
    * @param createdAt The new value for createdAt
    * @param failureMessages The new value for failureMessages
    */
-  public PaymentFailedResponseAvroModel(java.lang.String id, java.lang.String paymentId, java.lang.String customerId, java.lang.String orderId, java.lang.Long price, java.lang.Long createdAt, java.util.List<java.lang.String> failureMessages) {
+  public PaymentFailedResponseAvroModel(java.lang.String id, java.lang.String paymentId, java.lang.String customerId, java.lang.Long price, java.lang.Long createdAt, java.util.List<java.lang.String> failureMessages) {
     this.id = id;
     this.paymentId = paymentId;
     this.customerId = customerId;
-    this.orderId = orderId;
     this.price = price;
     this.createdAt = createdAt;
     this.failureMessages = failureMessages;
@@ -121,10 +118,9 @@ public class PaymentFailedResponseAvroModel extends org.apache.avro.specific.Spe
     case 0: return id;
     case 1: return paymentId;
     case 2: return customerId;
-    case 3: return orderId;
-    case 4: return price;
-    case 5: return createdAt;
-    case 6: return failureMessages;
+    case 3: return price;
+    case 4: return createdAt;
+    case 5: return failureMessages;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -137,10 +133,9 @@ public class PaymentFailedResponseAvroModel extends org.apache.avro.specific.Spe
     case 0: id = value$ != null ? value$.toString() : null; break;
     case 1: paymentId = value$ != null ? value$.toString() : null; break;
     case 2: customerId = value$ != null ? value$.toString() : null; break;
-    case 3: orderId = value$ != null ? value$.toString() : null; break;
-    case 4: price = (java.lang.Long)value$; break;
-    case 5: createdAt = (java.lang.Long)value$; break;
-    case 6: failureMessages = (java.util.List<java.lang.String>)value$; break;
+    case 3: price = (java.lang.Long)value$; break;
+    case 4: createdAt = (java.lang.Long)value$; break;
+    case 5: failureMessages = (java.util.List<java.lang.String>)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -194,23 +189,6 @@ public class PaymentFailedResponseAvroModel extends org.apache.avro.specific.Spe
    */
   public void setCustomerId(java.lang.String value) {
     this.customerId = value;
-  }
-
-  /**
-   * Gets the value of the 'orderId' field.
-   * @return The value of the 'orderId' field.
-   */
-  public java.lang.String getOrderId() {
-    return orderId;
-  }
-
-
-  /**
-   * Sets the value of the 'orderId' field.
-   * @param value the value to set.
-   */
-  public void setOrderId(java.lang.String value) {
-    this.orderId = value;
   }
 
   /**
@@ -308,7 +286,6 @@ public class PaymentFailedResponseAvroModel extends org.apache.avro.specific.Spe
     private java.lang.String id;
     private java.lang.String paymentId;
     private java.lang.String customerId;
-    private java.lang.String orderId;
     private long price;
     private long createdAt;
     private java.util.List<java.lang.String> failureMessages;
@@ -336,21 +313,17 @@ public class PaymentFailedResponseAvroModel extends org.apache.avro.specific.Spe
         this.customerId = data().deepCopy(fields()[2].schema(), other.customerId);
         fieldSetFlags()[2] = other.fieldSetFlags()[2];
       }
-      if (isValidValue(fields()[3], other.orderId)) {
-        this.orderId = data().deepCopy(fields()[3].schema(), other.orderId);
+      if (isValidValue(fields()[3], other.price)) {
+        this.price = data().deepCopy(fields()[3].schema(), other.price);
         fieldSetFlags()[3] = other.fieldSetFlags()[3];
       }
-      if (isValidValue(fields()[4], other.price)) {
-        this.price = data().deepCopy(fields()[4].schema(), other.price);
+      if (isValidValue(fields()[4], other.createdAt)) {
+        this.createdAt = data().deepCopy(fields()[4].schema(), other.createdAt);
         fieldSetFlags()[4] = other.fieldSetFlags()[4];
       }
-      if (isValidValue(fields()[5], other.createdAt)) {
-        this.createdAt = data().deepCopy(fields()[5].schema(), other.createdAt);
+      if (isValidValue(fields()[5], other.failureMessages)) {
+        this.failureMessages = data().deepCopy(fields()[5].schema(), other.failureMessages);
         fieldSetFlags()[5] = other.fieldSetFlags()[5];
-      }
-      if (isValidValue(fields()[6], other.failureMessages)) {
-        this.failureMessages = data().deepCopy(fields()[6].schema(), other.failureMessages);
-        fieldSetFlags()[6] = other.fieldSetFlags()[6];
       }
     }
 
@@ -372,21 +345,17 @@ public class PaymentFailedResponseAvroModel extends org.apache.avro.specific.Spe
         this.customerId = data().deepCopy(fields()[2].schema(), other.customerId);
         fieldSetFlags()[2] = true;
       }
-      if (isValidValue(fields()[3], other.orderId)) {
-        this.orderId = data().deepCopy(fields()[3].schema(), other.orderId);
+      if (isValidValue(fields()[3], other.price)) {
+        this.price = data().deepCopy(fields()[3].schema(), other.price);
         fieldSetFlags()[3] = true;
       }
-      if (isValidValue(fields()[4], other.price)) {
-        this.price = data().deepCopy(fields()[4].schema(), other.price);
+      if (isValidValue(fields()[4], other.createdAt)) {
+        this.createdAt = data().deepCopy(fields()[4].schema(), other.createdAt);
         fieldSetFlags()[4] = true;
       }
-      if (isValidValue(fields()[5], other.createdAt)) {
-        this.createdAt = data().deepCopy(fields()[5].schema(), other.createdAt);
+      if (isValidValue(fields()[5], other.failureMessages)) {
+        this.failureMessages = data().deepCopy(fields()[5].schema(), other.failureMessages);
         fieldSetFlags()[5] = true;
-      }
-      if (isValidValue(fields()[6], other.failureMessages)) {
-        this.failureMessages = data().deepCopy(fields()[6].schema(), other.failureMessages);
-        fieldSetFlags()[6] = true;
       }
     }
 
@@ -511,46 +480,6 @@ public class PaymentFailedResponseAvroModel extends org.apache.avro.specific.Spe
     }
 
     /**
-      * Gets the value of the 'orderId' field.
-      * @return The value.
-      */
-    public java.lang.String getOrderId() {
-      return orderId;
-    }
-
-
-    /**
-      * Sets the value of the 'orderId' field.
-      * @param value The value of 'orderId'.
-      * @return This builder.
-      */
-    public seungkyu.msa.service.kafka.model.PaymentFailedResponseAvroModel.Builder setOrderId(java.lang.String value) {
-      validate(fields()[3], value);
-      this.orderId = value;
-      fieldSetFlags()[3] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'orderId' field has been set.
-      * @return True if the 'orderId' field has been set, false otherwise.
-      */
-    public boolean hasOrderId() {
-      return fieldSetFlags()[3];
-    }
-
-
-    /**
-      * Clears the value of the 'orderId' field.
-      * @return This builder.
-      */
-    public seungkyu.msa.service.kafka.model.PaymentFailedResponseAvroModel.Builder clearOrderId() {
-      orderId = null;
-      fieldSetFlags()[3] = false;
-      return this;
-    }
-
-    /**
       * Gets the value of the 'price' field.
       * @return The value.
       */
@@ -565,9 +494,9 @@ public class PaymentFailedResponseAvroModel extends org.apache.avro.specific.Spe
       * @return This builder.
       */
     public seungkyu.msa.service.kafka.model.PaymentFailedResponseAvroModel.Builder setPrice(long value) {
-      validate(fields()[4], value);
+      validate(fields()[3], value);
       this.price = value;
-      fieldSetFlags()[4] = true;
+      fieldSetFlags()[3] = true;
       return this;
     }
 
@@ -576,7 +505,7 @@ public class PaymentFailedResponseAvroModel extends org.apache.avro.specific.Spe
       * @return True if the 'price' field has been set, false otherwise.
       */
     public boolean hasPrice() {
-      return fieldSetFlags()[4];
+      return fieldSetFlags()[3];
     }
 
 
@@ -585,7 +514,7 @@ public class PaymentFailedResponseAvroModel extends org.apache.avro.specific.Spe
       * @return This builder.
       */
     public seungkyu.msa.service.kafka.model.PaymentFailedResponseAvroModel.Builder clearPrice() {
-      fieldSetFlags()[4] = false;
+      fieldSetFlags()[3] = false;
       return this;
     }
 
@@ -604,9 +533,9 @@ public class PaymentFailedResponseAvroModel extends org.apache.avro.specific.Spe
       * @return This builder.
       */
     public seungkyu.msa.service.kafka.model.PaymentFailedResponseAvroModel.Builder setCreatedAt(long value) {
-      validate(fields()[5], value);
+      validate(fields()[4], value);
       this.createdAt = value;
-      fieldSetFlags()[5] = true;
+      fieldSetFlags()[4] = true;
       return this;
     }
 
@@ -615,7 +544,7 @@ public class PaymentFailedResponseAvroModel extends org.apache.avro.specific.Spe
       * @return True if the 'createdAt' field has been set, false otherwise.
       */
     public boolean hasCreatedAt() {
-      return fieldSetFlags()[5];
+      return fieldSetFlags()[4];
     }
 
 
@@ -624,7 +553,7 @@ public class PaymentFailedResponseAvroModel extends org.apache.avro.specific.Spe
       * @return This builder.
       */
     public seungkyu.msa.service.kafka.model.PaymentFailedResponseAvroModel.Builder clearCreatedAt() {
-      fieldSetFlags()[5] = false;
+      fieldSetFlags()[4] = false;
       return this;
     }
 
@@ -643,9 +572,9 @@ public class PaymentFailedResponseAvroModel extends org.apache.avro.specific.Spe
       * @return This builder.
       */
     public seungkyu.msa.service.kafka.model.PaymentFailedResponseAvroModel.Builder setFailureMessages(java.util.List<java.lang.String> value) {
-      validate(fields()[6], value);
+      validate(fields()[5], value);
       this.failureMessages = value;
-      fieldSetFlags()[6] = true;
+      fieldSetFlags()[5] = true;
       return this;
     }
 
@@ -654,7 +583,7 @@ public class PaymentFailedResponseAvroModel extends org.apache.avro.specific.Spe
       * @return True if the 'failureMessages' field has been set, false otherwise.
       */
     public boolean hasFailureMessages() {
-      return fieldSetFlags()[6];
+      return fieldSetFlags()[5];
     }
 
 
@@ -664,7 +593,7 @@ public class PaymentFailedResponseAvroModel extends org.apache.avro.specific.Spe
       */
     public seungkyu.msa.service.kafka.model.PaymentFailedResponseAvroModel.Builder clearFailureMessages() {
       failureMessages = null;
-      fieldSetFlags()[6] = false;
+      fieldSetFlags()[5] = false;
       return this;
     }
 
@@ -676,10 +605,9 @@ public class PaymentFailedResponseAvroModel extends org.apache.avro.specific.Spe
         record.id = fieldSetFlags()[0] ? this.id : (java.lang.String) defaultValue(fields()[0]);
         record.paymentId = fieldSetFlags()[1] ? this.paymentId : (java.lang.String) defaultValue(fields()[1]);
         record.customerId = fieldSetFlags()[2] ? this.customerId : (java.lang.String) defaultValue(fields()[2]);
-        record.orderId = fieldSetFlags()[3] ? this.orderId : (java.lang.String) defaultValue(fields()[3]);
-        record.price = fieldSetFlags()[4] ? this.price : (java.lang.Long) defaultValue(fields()[4]);
-        record.createdAt = fieldSetFlags()[5] ? this.createdAt : (java.lang.Long) defaultValue(fields()[5]);
-        record.failureMessages = fieldSetFlags()[6] ? this.failureMessages : (java.util.List<java.lang.String>) defaultValue(fields()[6]);
+        record.price = fieldSetFlags()[3] ? this.price : (java.lang.Long) defaultValue(fields()[3]);
+        record.createdAt = fieldSetFlags()[4] ? this.createdAt : (java.lang.Long) defaultValue(fields()[4]);
+        record.failureMessages = fieldSetFlags()[5] ? this.failureMessages : (java.util.List<java.lang.String>) defaultValue(fields()[5]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;
@@ -718,8 +646,6 @@ public class PaymentFailedResponseAvroModel extends org.apache.avro.specific.Spe
 
     out.writeString(this.customerId);
 
-    out.writeString(this.orderId);
-
     out.writeLong(this.price);
 
     out.writeLong(this.createdAt);
@@ -750,8 +676,6 @@ public class PaymentFailedResponseAvroModel extends org.apache.avro.specific.Spe
 
       this.customerId = in.readString();
 
-      this.orderId = in.readString();
-
       this.price = in.readLong();
 
       this.createdAt = in.readLong();
@@ -772,7 +696,7 @@ public class PaymentFailedResponseAvroModel extends org.apache.avro.specific.Spe
       }
 
     } else {
-      for (int i = 0; i < 7; i++) {
+      for (int i = 0; i < 6; i++) {
         switch (fieldOrder[i].pos()) {
         case 0:
           this.id = in.readString();
@@ -787,18 +711,14 @@ public class PaymentFailedResponseAvroModel extends org.apache.avro.specific.Spe
           break;
 
         case 3:
-          this.orderId = in.readString();
-          break;
-
-        case 4:
           this.price = in.readLong();
           break;
 
-        case 5:
+        case 4:
           this.createdAt = in.readLong();
           break;
 
-        case 6:
+        case 5:
           long size0 = in.readArrayStart();
           java.util.List<java.lang.String> a0 = this.failureMessages;
           if (a0 == null) {

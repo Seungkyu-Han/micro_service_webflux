@@ -31,4 +31,10 @@ class Payment(
             failureMessages.add("결제 금액은 0원을 넘어야합니다.")
         }
     }
+
+    override fun toString(): String {
+        return "Payment(id=$id, customerId=$customerId, price=$price, paymentStatus=$paymentStatus, createdAt=$createdAt)"
+    }
+
+
 }
