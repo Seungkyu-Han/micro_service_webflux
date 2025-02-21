@@ -18,6 +18,8 @@ kafka:
     payment-completed-response: payment_completed_response_topic
     payment-cancelled-response: payment_cancelled_response_topic
     payment-failed-response: payment_failed_response_topic
+    order-approval-request: order_approval_request_topic
+    order-approval-response: order_approval_response_topic
 
 
   consumer:
