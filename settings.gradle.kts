@@ -54,3 +54,5 @@ findProject(":customer:customer-persistence")?.name = "customer-persistence"
 include("infrastructure")
 include("infrastructure:kafka")
 findProject(":infrastructure:kafka")?.name = "kafka"
+include("infrastructure:saga")
+findProject(":infrastructure:saga")?.name = "saga"
