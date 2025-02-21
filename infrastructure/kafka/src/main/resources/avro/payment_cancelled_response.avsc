@@ -9,11 +9,6 @@
     },
 
     {
-      "name": "paymentId",
-      "type": "string"
-    },
-
-    {
       "name": "customerId",
       "type": "string"
     },
@@ -26,16 +21,7 @@
     {
       "name": "createdAt",
       "type": "long"
-    },
-
-    {
-      "name": "failureMessages",
-      "type": {
-        "type": "array",
-        "items": {
-          "type": "string"
-        }
-      }
     }
+
   ]
 }
