@@ -12,12 +12,14 @@ import seungkyu.msa.service.order.domain.entity.Order
 import seungkyu.msa.service.order.domain.entity.OrderItem
 import seungkyu.msa.service.order.service.dto.create.CreateOrderCommand
 import seungkyu.msa.service.order.service.dto.create.CreateOrderResponse
+import seungkyu.msa.service.order.service.ports.output.message.publisher.payment.OrderCreatedPaymentRequestMessagePublisher
 import seungkyu.msa.service.order.service.ports.output.repository.OrderRepository
 
 @Service
 class OrderApplicationServiceImpl(
     private val orderRepository: OrderRepository,
-    private val orderDomainService: OrderDomainService
+    private val orderDomainService: OrderDomainService,
+    private val orderCreatedPaymentRequestMessagePublisher: OrderCreatedPaymentRequestMessagePublisher
 ): OrderApplicationService {
 
     override fun createOrder(createOrderCommand: CreateOrderCommand): Mono<CreateOrderResponse> {
@@ -32,6 +34,8 @@ class OrderApplicationServiceImpl(
             },
             price = Money(createOrderCommand.price)
         )
+
+        orderCreatedPaymentRequestMessagePublisher.publish(orderCreatedEvent)
 
         return orderRepository.save(orderCreatedEvent.order)
             .thenReturn(CreateOrderResponse(

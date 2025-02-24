@@ -26,7 +26,7 @@ class OrderApprovalRequestKafkaListener(
     override fun receive(
         @Payload values: List<RestaurantApprovalRequestAvroModel>,
         @Header(KafkaHeaders.RECEIVED_KEY) keys: List<String>,
-        @Header(KafkaHeaders.PARTITION) partitions: List<Int>,
+        @Header(KafkaHeaders.RECEIVED_PARTITION) partitions: List<Int>,
         @Header(KafkaHeaders.OFFSET) offsets: List<Long>
     ) {
         logger.info("{}개의 승인 요청이 {}키, {}파티션, {}오프셋과 전달되었습니다",
@@ -49,7 +49,9 @@ class OrderApprovalRequestKafkaListener(
                 restaurantApprovalRequestAvroModel.restaurantOrderStatus.name
             ),
             price = restaurantApprovalRequestAvroModel.price,
-            products = restaurantApprovalRequestAvroModel.products.toMap(HashMap()),
+            products = restaurantApprovalRequestAvroModel.products.associate {
+                it.productId to it.quantity
+            }.toMap(HashMap()),
             createdAt = LocalDateTime.ofEpochSecond(restaurantApprovalRequestAvroModel.createdAt, 0, ZoneOffset.UTC)
         )
     }

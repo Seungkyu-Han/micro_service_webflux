@@ -14,10 +14,10 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class RestaurantApprovalRequestAvroModel extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -6074477667176775118L;
+  private static final long serialVersionUID = 7360410250025182427L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"RestaurantApprovalRequestAvroModel\",\"namespace\":\"seungkyu.msa.service.kafka.model\",\"fields\":[{\"name\":\"orderId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"restaurantId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"restaurantOrderStatus\",\"type\":{\"type\":\"enum\",\"name\":\"RestaurantOrderStatus\",\"symbols\":[\"PAID\"]}},{\"name\":\"price\",\"type\":\"long\"},{\"name\":\"createdAt\",\"type\":\"long\"},{\"name\":\"products\",\"type\":{\"type\":\"map\",\"values\":\"int\",\"avro.java.string\":\"String\"}}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"RestaurantApprovalRequestAvroModel\",\"namespace\":\"seungkyu.msa.service.kafka.model\",\"fields\":[{\"name\":\"orderId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"restaurantId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"restaurantOrderStatus\",\"type\":{\"type\":\"enum\",\"name\":\"RestaurantOrderStatus\",\"symbols\":[\"PAID\"]}},{\"name\":\"price\",\"type\":\"long\"},{\"name\":\"createdAt\",\"type\":\"long\"},{\"name\":\"products\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"Product\",\"fields\":[{\"name\":\"productId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"quantity\",\"type\":\"int\"}]}}}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -78,7 +78,7 @@ public class RestaurantApprovalRequestAvroModel extends org.apache.avro.specific
   private seungkyu.msa.service.kafka.model.RestaurantOrderStatus restaurantOrderStatus;
   private long price;
   private long createdAt;
-  private java.util.Map<java.lang.String,java.lang.Integer> products;
+  private java.util.List<seungkyu.msa.service.kafka.model.Product> products;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -96,7 +96,7 @@ public class RestaurantApprovalRequestAvroModel extends org.apache.avro.specific
    * @param createdAt The new value for createdAt
    * @param products The new value for products
    */
-  public RestaurantApprovalRequestAvroModel(java.lang.String orderId, java.lang.String restaurantId, seungkyu.msa.service.kafka.model.RestaurantOrderStatus restaurantOrderStatus, java.lang.Long price, java.lang.Long createdAt, java.util.Map<java.lang.String,java.lang.Integer> products) {
+  public RestaurantApprovalRequestAvroModel(java.lang.String orderId, java.lang.String restaurantId, seungkyu.msa.service.kafka.model.RestaurantOrderStatus restaurantOrderStatus, java.lang.Long price, java.lang.Long createdAt, java.util.List<seungkyu.msa.service.kafka.model.Product> products) {
     this.orderId = orderId;
     this.restaurantId = restaurantId;
     this.restaurantOrderStatus = restaurantOrderStatus;
@@ -135,7 +135,7 @@ public class RestaurantApprovalRequestAvroModel extends org.apache.avro.specific
     case 2: restaurantOrderStatus = (seungkyu.msa.service.kafka.model.RestaurantOrderStatus)value$; break;
     case 3: price = (java.lang.Long)value$; break;
     case 4: createdAt = (java.lang.Long)value$; break;
-    case 5: products = (java.util.Map<java.lang.String,java.lang.Integer>)value$; break;
+    case 5: products = (java.util.List<seungkyu.msa.service.kafka.model.Product>)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -229,7 +229,7 @@ public class RestaurantApprovalRequestAvroModel extends org.apache.avro.specific
    * Gets the value of the 'products' field.
    * @return The value of the 'products' field.
    */
-  public java.util.Map<java.lang.String,java.lang.Integer> getProducts() {
+  public java.util.List<seungkyu.msa.service.kafka.model.Product> getProducts() {
     return products;
   }
 
@@ -238,7 +238,7 @@ public class RestaurantApprovalRequestAvroModel extends org.apache.avro.specific
    * Sets the value of the 'products' field.
    * @param value the value to set.
    */
-  public void setProducts(java.util.Map<java.lang.String,java.lang.Integer> value) {
+  public void setProducts(java.util.List<seungkyu.msa.service.kafka.model.Product> value) {
     this.products = value;
   }
 
@@ -288,7 +288,7 @@ public class RestaurantApprovalRequestAvroModel extends org.apache.avro.specific
     private seungkyu.msa.service.kafka.model.RestaurantOrderStatus restaurantOrderStatus;
     private long price;
     private long createdAt;
-    private java.util.Map<java.lang.String,java.lang.Integer> products;
+    private java.util.List<seungkyu.msa.service.kafka.model.Product> products;
 
     /** Creates a new Builder */
     private Builder() {
@@ -561,7 +561,7 @@ public class RestaurantApprovalRequestAvroModel extends org.apache.avro.specific
       * Gets the value of the 'products' field.
       * @return The value.
       */
-    public java.util.Map<java.lang.String,java.lang.Integer> getProducts() {
+    public java.util.List<seungkyu.msa.service.kafka.model.Product> getProducts() {
       return products;
     }
 
@@ -571,7 +571,7 @@ public class RestaurantApprovalRequestAvroModel extends org.apache.avro.specific
       * @param value The value of 'products'.
       * @return This builder.
       */
-    public seungkyu.msa.service.kafka.model.RestaurantApprovalRequestAvroModel.Builder setProducts(java.util.Map<java.lang.String,java.lang.Integer> value) {
+    public seungkyu.msa.service.kafka.model.RestaurantApprovalRequestAvroModel.Builder setProducts(java.util.List<seungkyu.msa.service.kafka.model.Product> value) {
       validate(fields()[5], value);
       this.products = value;
       fieldSetFlags()[5] = true;
@@ -607,7 +607,7 @@ public class RestaurantApprovalRequestAvroModel extends org.apache.avro.specific
         record.restaurantOrderStatus = fieldSetFlags()[2] ? this.restaurantOrderStatus : (seungkyu.msa.service.kafka.model.RestaurantOrderStatus) defaultValue(fields()[2]);
         record.price = fieldSetFlags()[3] ? this.price : (java.lang.Long) defaultValue(fields()[3]);
         record.createdAt = fieldSetFlags()[4] ? this.createdAt : (java.lang.Long) defaultValue(fields()[4]);
-        record.products = fieldSetFlags()[5] ? this.products : (java.util.Map<java.lang.String,java.lang.Integer>) defaultValue(fields()[5]);
+        record.products = fieldSetFlags()[5] ? this.products : (java.util.List<seungkyu.msa.service.kafka.model.Product>) defaultValue(fields()[5]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;
@@ -651,19 +651,17 @@ public class RestaurantApprovalRequestAvroModel extends org.apache.avro.specific
     out.writeLong(this.createdAt);
 
     long size0 = this.products.size();
-    out.writeMapStart();
+    out.writeArrayStart();
     out.setItemCount(size0);
     long actualSize0 = 0;
-    for (java.util.Map.Entry<java.lang.String, java.lang.Integer> e0: this.products.entrySet()) {
+    for (seungkyu.msa.service.kafka.model.Product e0: this.products) {
       actualSize0++;
       out.startItem();
-      out.writeString(e0.getKey());
-      java.lang.Integer v0 = e0.getValue();
-      out.writeInt(v0);
+      e0.customEncode(out);
     }
-    out.writeMapEnd();
+    out.writeArrayEnd();
     if (actualSize0 != size0)
-      throw new java.util.ConcurrentModificationException("Map-size written was " + size0 + ", but element count was " + actualSize0 + ".");
+      throw new java.util.ConcurrentModificationException("Array-size written was " + size0 + ", but element count was " + actualSize0 + ".");
 
   }
 
@@ -682,19 +680,21 @@ public class RestaurantApprovalRequestAvroModel extends org.apache.avro.specific
 
       this.createdAt = in.readLong();
 
-      long size0 = in.readMapStart();
-      java.util.Map<java.lang.String,java.lang.Integer> m0 = this.products; // Need fresh name due to limitation of macro system
-      if (m0 == null) {
-        m0 = new java.util.HashMap<java.lang.String,java.lang.Integer>((int)size0);
-        this.products = m0;
-      } else m0.clear();
-      for ( ; 0 < size0; size0 = in.mapNext()) {
+      long size0 = in.readArrayStart();
+      java.util.List<seungkyu.msa.service.kafka.model.Product> a0 = this.products;
+      if (a0 == null) {
+        a0 = new SpecificData.Array<seungkyu.msa.service.kafka.model.Product>((int)size0, SCHEMA$.getField("products").schema());
+        this.products = a0;
+      } else a0.clear();
+      SpecificData.Array<seungkyu.msa.service.kafka.model.Product> ga0 = (a0 instanceof SpecificData.Array ? (SpecificData.Array<seungkyu.msa.service.kafka.model.Product>)a0 : null);
+      for ( ; 0 < size0; size0 = in.arrayNext()) {
         for ( ; size0 != 0; size0--) {
-          java.lang.String k0 = null;
-          k0 = in.readString();
-          java.lang.Integer v0 = null;
-          v0 = in.readInt();
-          m0.put(k0, v0);
+          seungkyu.msa.service.kafka.model.Product e0 = (ga0 != null ? ga0.peek() : null);
+          if (e0 == null) {
+            e0 = new seungkyu.msa.service.kafka.model.Product();
+          }
+          e0.customDecode(in);
+          a0.add(e0);
         }
       }
 
@@ -722,19 +722,21 @@ public class RestaurantApprovalRequestAvroModel extends org.apache.avro.specific
           break;
 
         case 5:
-          long size0 = in.readMapStart();
-          java.util.Map<java.lang.String,java.lang.Integer> m0 = this.products; // Need fresh name due to limitation of macro system
-          if (m0 == null) {
-            m0 = new java.util.HashMap<java.lang.String,java.lang.Integer>((int)size0);
-            this.products = m0;
-          } else m0.clear();
-          for ( ; 0 < size0; size0 = in.mapNext()) {
+          long size0 = in.readArrayStart();
+          java.util.List<seungkyu.msa.service.kafka.model.Product> a0 = this.products;
+          if (a0 == null) {
+            a0 = new SpecificData.Array<seungkyu.msa.service.kafka.model.Product>((int)size0, SCHEMA$.getField("products").schema());
+            this.products = a0;
+          } else a0.clear();
+          SpecificData.Array<seungkyu.msa.service.kafka.model.Product> ga0 = (a0 instanceof SpecificData.Array ? (SpecificData.Array<seungkyu.msa.service.kafka.model.Product>)a0 : null);
+          for ( ; 0 < size0; size0 = in.arrayNext()) {
             for ( ; size0 != 0; size0--) {
-              java.lang.String k0 = null;
-              k0 = in.readString();
-              java.lang.Integer v0 = null;
-              v0 = in.readInt();
-              m0.put(k0, v0);
+              seungkyu.msa.service.kafka.model.Product e0 = (ga0 != null ? ga0.peek() : null);
+              if (e0 == null) {
+                e0 = new seungkyu.msa.service.kafka.model.Product();
+              }
+              e0.customDecode(in);
+              a0.add(e0);
             }
           }
           break;
