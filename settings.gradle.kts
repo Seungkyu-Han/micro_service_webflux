@@ -56,3 +56,5 @@ include("infrastructure:kafka")
 findProject(":infrastructure:kafka")?.name = "kafka"
 include("infrastructure:saga")
 findProject(":infrastructure:saga")?.name = "saga"
+include("infrastructure:outbox")
+findProject(":infrastructure:outbox")?.name = "outbox"
