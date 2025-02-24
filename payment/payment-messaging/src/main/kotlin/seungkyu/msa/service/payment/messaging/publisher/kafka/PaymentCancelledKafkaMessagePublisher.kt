@@ -20,7 +20,7 @@ class PaymentCancelledKafkaMessagePublisher(
 
     override fun publish(domainEvent: PaymentEvent) {
 
-        logger.info("주문: {}의 결제 실패 이벤트를 전송하겠습니다", domainEvent.payment.id.id.toString())
+        logger.info("주문: {}의 결제 취소 이벤트를 전송하겠습니다", domainEvent.payment.id.id.toString())
 
         val paymentCompletedResponseAvroModel = paymentFailedEventToPaymentCancelledResponseAvroModel(domainEvent)
         

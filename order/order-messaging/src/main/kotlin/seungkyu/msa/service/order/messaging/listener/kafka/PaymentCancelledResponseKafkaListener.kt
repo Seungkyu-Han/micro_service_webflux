@@ -33,7 +33,7 @@ class PaymentCancelledResponseKafkaListener(
             values.size, keys.toString(), partitions.toString(), offsets.toString())
 
         values.forEach{
-            logger.info("{} 주문이 성공적 결제 취소되었습니다", it.id.toString())
+            logger.info("{} 주문의 결제 취소하겠습니다", it.id.toString())
             paymentResponseMessageListener.paymentCancelled(
                 paymentCompletedResponseAvroModelToPaymentResponse(it)
             )

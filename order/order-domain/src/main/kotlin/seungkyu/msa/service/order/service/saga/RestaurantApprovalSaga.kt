@@ -42,9 +42,7 @@ class RestaurantApprovalSaga(
         logger.info("{} 주문이 미승인 되었습니다", data.id)
         return orderRepository.findById(ObjectId(data.id))
             .flatMap {
-                val orderCancelledEvent:OrderCancelledEvent = orderDomainService.cancelOrderPayment(it)
-                println("이거다")
-                println(orderCancelledEvent)
+                val orderCancelledEvent = orderDomainService.cancelOrderPayment(it)
                 orderRepository.save(it)
                     .thenReturn(orderCancelledEvent)
             }.doOnNext{
