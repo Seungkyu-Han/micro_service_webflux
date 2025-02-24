@@ -8,6 +8,8 @@ repositories {
 
 dependencies {
     implementation(project(":common:common-domain"))
+    implementation("io.projectreactor:reactor-core:3.7.3")
+
 }
 
 tasks.test {

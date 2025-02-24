@@ -8,7 +8,7 @@ value class Money(
         val ZERO = Money(0)
     }
 
-    fun isGreaterThanZero() = amount > 0
+    fun isGreaterThanZero() = amount >= 0
 
     fun isGreaterThan(money: Money) = this.amount >= money.amount
 

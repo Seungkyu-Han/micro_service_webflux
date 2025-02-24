@@ -15,4 +15,10 @@ class Credit(
     fun subtractCreditAmount(amount: Money){
         totalCreditAmount -= amount
     }
+
+    override fun toString(): String {
+        return "Credit(customerId=$customerId, totalCreditAmount=$totalCreditAmount)"
+    }
+
+
 }

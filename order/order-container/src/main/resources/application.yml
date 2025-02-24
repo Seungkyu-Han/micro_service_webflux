@@ -4,16 +4,29 @@ spring:
       uri: mongodb://seungkyu:1204@localhost:27017/msa?authSource=admin
   kafka:
     bootstrap-servers: localhost:9092
+    consumer:
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+      properties:
+        schema.registry.url: http://localhost:8081
+        specific.avro.reader: true
 
 
 kafka:
   topic:
     payment-request: payment_request_topic
+    payment-completed-response: payment_completed_response_topic
+    payment-cancelled-response: payment_cancelled_response_topic
+    payment-failed-response: payment_failed_response_topic
+    order-approval-request: order_approval_request_topic
     order-approval-response: order_approval_response_topic
 
 
   consumer:
-    restaurant-consumer-group-id: restaurant_consumer_group
+    order-completed-consumer-group-id: order_completed_consumer_group
+    order-cancelled-consumer-group-id: order_cancelled_consumer_group
+    order-failed-consumer-group-id: order_failed_consumer_group
+    order-approval-consumer-group-id: order_approval_consumer_group
 
 
 server:

@@ -36,8 +36,22 @@
     {
       "name": "products",
       "type": {
-        "type": "map",
-        "values": "int"
+        "type": "array",
+        "items": {
+          "name": "Product",
+          "type": "record",
+          "fields": [
+            {
+              "name": "productId",
+              "type": "string"
+            },
+
+            {
+              "name": "quantity",
+              "type": "int"
+            }
+          ]
+        }
       }
     }
   ]

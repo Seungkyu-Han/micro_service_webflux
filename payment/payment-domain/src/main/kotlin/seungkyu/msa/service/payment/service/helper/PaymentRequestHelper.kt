@@ -46,7 +46,7 @@ class PaymentRequestHelper(
 
     @Transactional
     fun persistCancelPayment(paymentRequestDto: PaymentRequestDto): Mono<PaymentEvent>{
-        logger.info("주문 {}의 취소 이벤트를 수신했습니다", paymentRequestDto.id)
+        logger.info("주문 {}의 결제 취소 이벤트를 수신했습니다", paymentRequestDto.id)
         //해당 주문의 유무를 조회
         return findPaymentByOrderId(orderId = ObjectId(paymentRequestDto.id))
             .flatMap{
@@ -58,6 +58,7 @@ class PaymentRequestHelper(
                         val paymentEvent: PaymentEvent = paymentDomainService.validateAndCancelPayment(
                             payment = payment, credit = credit, failureMessages = mutableListOf()
                         )
+                        logger.info("{}의 잔액이 복구되었습니다 {}", paymentRequestDto.customerId, credit.totalCreditAmount)
                         //결제 복구 후 상태를 데이터베이스에 저장
                         saveToDB(payment = payment, credit = credit)
                             //결제 이벤트를 반환
@@ -68,11 +69,12 @@ class PaymentRequestHelper(
 
 
 
-    private fun saveToDB(payment: Payment, credit: Credit):Mono<Void> = paymentRepository.save(payment)
+    private fun saveToDB(payment: Payment, credit: Credit):Mono<Void> =
+        paymentRepository.save(payment)
             .filter{
-                payment.paymentStatus == PaymentStatus.COMPLETED
+                payment.paymentStatus == PaymentStatus.COMPLETED || payment.paymentStatus == PaymentStatus.CANCELLED
             }
-            .map{
+            .flatMap{
                 creditRepository.save(credit)
             }
             .then()

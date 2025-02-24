@@ -11,6 +11,7 @@ repositories {
 
 dependencies {
     implementation(project(":common:common-domain"))
+    implementation(project(":infrastructure:saga"))
     implementation("org.mongodb:bson:5.3.1")
 
     implementation("org.springframework.boot:spring-boot-starter-webflux")

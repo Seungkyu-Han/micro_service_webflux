@@ -30,7 +30,7 @@ data class Order(
     }
 
     fun cancel(){
-        if(!(orderStatus == OrderStatus.PAID || orderStatus == OrderStatus.CANCELLING)){
+        if(!(orderStatus == OrderStatus.PENDING || orderStatus == OrderStatus.CANCELLING || orderStatus == OrderStatus.PENDING)){
             throw OrderDomainException("${orderId.id} 주문은 취소 할 수 없습니다.")
         }
         orderStatus = OrderStatus.CANCELLED
