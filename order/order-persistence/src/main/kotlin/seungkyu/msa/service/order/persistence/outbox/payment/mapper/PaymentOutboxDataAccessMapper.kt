@@ -10,6 +10,7 @@ import seungkyu.msa.service.order.service.outbox.model.payment.PaymentOutboxMess
 class PaymentOutboxDataAccessMapper {
 
     fun paymentOutboxMessageToPaymentOutboxEntity(payOutboxMessage: PaymentOutboxMessage): PaymentOutboxEntity {
+        println("paymentOutboxMessageToPaymentOutboxEntity ${payOutboxMessage.payload.orderStatus}")
         return PaymentOutboxEntity(
             id = payOutboxMessage.id,
             createdAt = payOutboxMessage.createdAt,
@@ -29,6 +30,7 @@ class PaymentOutboxDataAccessMapper {
     }
 
     fun paymentOutboxEntityToPaymentOutboxMessage(paymentOutboxEntity: PaymentOutboxEntity): PaymentOutboxMessage {
+        println("paymentOutboxEntityToPaymentOutboxMessage ${paymentOutboxEntity.orderStatus}")
         return PaymentOutboxMessage(
             id = paymentOutboxEntity.id,
             createdAt = paymentOutboxEntity.createdAt,

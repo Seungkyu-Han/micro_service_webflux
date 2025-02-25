@@ -6,7 +6,6 @@ import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 import seungkyu.msa.service.common.status.OrderStatus
 import seungkyu.msa.service.order.persistence.outbox.payment.entity.PaymentOutboxEntity
-import seungkyu.msa.service.order.service.outbox.model.payment.PaymentOutboxMessage
 import seungkyu.msa.service.outbox.OutboxStatus
 
 interface PaymentOutboxMongoRepository: ReactiveMongoRepository<PaymentOutboxEntity, ObjectId> {
@@ -15,7 +14,7 @@ interface PaymentOutboxMongoRepository: ReactiveMongoRepository<PaymentOutboxEnt
         type: String,
         outboxStatus: OutboxStatus,
         orderStatuses: List<OrderStatus>
-    ): Flux<PaymentOutboxMessage>
+    ): Flux<PaymentOutboxEntity>
 
     fun findByTypeAndIdAndOrderStatusIn(
         type: String, id: ObjectId, orderStatus: List<OrderStatus>

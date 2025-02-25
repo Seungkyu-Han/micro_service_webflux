@@ -51,16 +51,17 @@ class PaymentOutboxHelper(
     }
 
     @Transactional
-    fun save(paymentOutboxPayload: PaymentEventPayload,
-             orderStatus: OrderStatus,
-             outboxStatus: OutboxStatus): Mono<Void> {
-        return save(
+    fun savePaymentOutboxMessage(
+        paymentOutboxPayload: PaymentEventPayload,
+        orderStatus: OrderStatus,
+        outboxStatus: OutboxStatus): Mono<Void> {
+        return paymentOutboxRepository.save(
             PaymentOutboxMessage(
                 id = paymentOutboxPayload.orderId,
                 outboxStatus = outboxStatus,
                 type = ORDER_SAGA_NAME,
                 payload = paymentOutboxPayload,
-                version = -1,
+                version = 0,
                 createdAt = paymentOutboxPayload.createdAt,
                 processedAt = LocalDateTime.now()
             )

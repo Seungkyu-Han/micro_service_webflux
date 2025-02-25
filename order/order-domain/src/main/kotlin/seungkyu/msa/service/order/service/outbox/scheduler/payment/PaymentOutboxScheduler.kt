@@ -21,6 +21,7 @@ class PaymentOutboxScheduler(
     @Transactional
     @Scheduled(fixedDelay = 10000, initialDelay = 10000)
     override fun processOutboxMessages() {
+        logger.info("결제를 요청하는 스케줄러가 실행되었습니다.")
         paymentOutboxHelper.getPaymentOutboxMessageByOutboxStatusAndOrderStatus(
             OutboxStatus.STARTED,
             listOf(OrderStatus.PENDING, OrderStatus.CANCELLING)

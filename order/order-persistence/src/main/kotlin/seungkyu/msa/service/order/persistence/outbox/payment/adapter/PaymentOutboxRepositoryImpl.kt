@@ -32,7 +32,7 @@ class PaymentOutboxRepositoryImpl(
     ): Flux<PaymentOutboxMessage> {
         return paymentOutboxMongoRepository.findByTypeAndOutboxStatusAndOrderStatusIn(
             type, outboxStatus, orderStatuses
-        )
+        ).map(paymentOutboxDataAccessMapper::paymentOutboxEntityToPaymentOutboxMessage)
     }
 
     override fun findByTypeAndIdAndOrderStatus(

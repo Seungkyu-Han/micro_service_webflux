@@ -8,15 +8,13 @@ import reactor.core.publisher.Mono
 import seungkyu.msa.service.common.event.EmptyEvent
 import seungkyu.msa.service.order.domain.OrderDomainService
 import seungkyu.msa.service.order.service.dto.message.RestaurantApprovalResponse
-import seungkyu.msa.service.order.service.ports.output.message.publisher.payment.OrderCancelledPaymentRequestMessagePublisher
 import seungkyu.msa.service.order.service.ports.output.repository.OrderRepository
 import seungkyu.msa.service.saga.SagaStep
 
 @Component
 class RestaurantApprovalSaga(
     private val orderDomainService: OrderDomainService,
-    private val orderRepository: OrderRepository,
-    private val orderCancelledPaymentRequestMessagePublisher: OrderCancelledPaymentRequestMessagePublisher
+    private val orderRepository: OrderRepository
 ): SagaStep<RestaurantApprovalResponse> {
 
     private val logger = LoggerFactory.getLogger(RestaurantApprovalSaga::class.java)
@@ -46,8 +44,6 @@ class RestaurantApprovalSaga(
                     .thenReturn(orderCancelledEvent)
             }.doOnNext{
                 logger.info("{} 주문이 취소 중 상태로 저장되었습니다", it.order.orderId.id.toString())
-            }.doOnNext{
-                orderCancelledPaymentRequestMessagePublisher.publish(it)
             }.doOnNext {
                 logger.info("{} 주문의 결제 취소 이벤트를 전송했습니다.", it.order.orderId.id.toString())
             }.then()
