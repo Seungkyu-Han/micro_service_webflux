@@ -15,6 +15,7 @@ spring:
 kafka:
   topic:
     payment-request: payment_request_topic
+    payment-response: payment_response_topic
     payment-completed-response: payment_completed_response_topic
     payment-cancelled-response: payment_cancelled_response_topic
     payment-failed-response: payment_failed_response_topic
@@ -23,6 +24,7 @@ kafka:
 
 
   consumer:
+    payment-consumer-group-id: order_consumer_group
     order-completed-consumer-group-id: order_completed_consumer_group
     order-cancelled-consumer-group-id: order_cancelled_consumer_group
     order-failed-consumer-group-id: order_failed_consumer_group
