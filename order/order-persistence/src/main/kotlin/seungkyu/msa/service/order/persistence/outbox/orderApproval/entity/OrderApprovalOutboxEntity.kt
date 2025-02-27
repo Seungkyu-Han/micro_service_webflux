@@ -3,6 +3,7 @@ package seungkyu.msa.service.order.persistence.outbox.orderApproval.entity
 import org.bson.types.ObjectId
 import org.springframework.data.annotation.Version
 import seungkyu.msa.service.common.status.OrderStatus
+import seungkyu.msa.service.outbox.OutboxStatus
 import java.time.LocalDateTime
 
 data class OrderApprovalOutboxEntity(
@@ -12,7 +13,7 @@ data class OrderApprovalOutboxEntity(
     val type: String,
     val payload: OrderApprovalEventPayloadEntity,
     val orderStatus: OrderStatus,
-    val outboxStatus: OrderStatus,
+    val outboxStatus: OutboxStatus,
     @Version
     val version: Int
 )
