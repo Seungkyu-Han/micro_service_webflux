@@ -15,11 +15,11 @@ interface OrderApprovalOutboxRepository {
                                                 outboxStatus: OutboxStatus,
                                                 orderStatuses: List<OrderStatus>): Flux<OrderApprovalOutboxMessage>
 
-    fun findByTypeIdAndOrderStatus(type: String,
-                                   id: ObjectId,
-                                   orderStatuses: List<OrderStatus>): Mono<OrderApprovalOutboxMessage>
+    fun findByIdAndTypeAndOrderStatus(type: String,
+                                      id: ObjectId,
+                                      orderStatuses: List<OrderStatus>): Mono<OrderApprovalOutboxMessage>
 
-    fun deleteByTypeAndOrderStatus(type: String,
-                                   outboxStatus: OutboxStatus,
-                                   orderStatuses: List<OrderStatus>): Mono<Void>
+    fun deleteByTypeAndOutboxStatusAndOrderStatus(type: String,
+                                                  outboxStatus: OutboxStatus,
+                                                  orderStatuses: List<OrderStatus>): Mono<Void>
 }

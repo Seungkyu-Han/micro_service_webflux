@@ -30,7 +30,7 @@ class OrderApprovalOutboxHelper(
     @Transactional(readOnly = true)
     fun getApprovalOutboxMessageByIdAndOrderStatus(
         id: ObjectId, orderStatuses: List<OrderStatus>): Mono<OrderApprovalOutboxMessage>{
-        return orderApprovalOutboxRepository.findByTypeIdAndOrderStatus(
+        return orderApprovalOutboxRepository.findByIdAndTypeAndOrderStatus(
             ORDER_SAGA_NAME, id, orderStatuses)
     }
 
@@ -47,7 +47,7 @@ class OrderApprovalOutboxHelper(
         outboxStatus: OutboxStatus,
         orderStatuses: List<OrderStatus>
     ): Mono<Void>{
-        return orderApprovalOutboxRepository.deleteByTypeAndOrderStatus(
+        return orderApprovalOutboxRepository.deleteByTypeAndOutboxStatusAndOrderStatus(
             ORDER_SAGA_NAME, outboxStatus, orderStatuses
         )
     }
