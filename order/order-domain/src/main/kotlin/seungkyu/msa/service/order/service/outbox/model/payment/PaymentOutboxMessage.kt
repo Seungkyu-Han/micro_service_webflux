@@ -9,7 +9,7 @@ data class PaymentOutboxMessage(
     val createdAt: LocalDateTime,
     var processedAt: LocalDateTime,
     val type: String,
-    val payload: PaymentEventPayload,
+    var payload: PaymentEventPayload,
     var outboxStatus: OutboxStatus,
     val version: Int
 )

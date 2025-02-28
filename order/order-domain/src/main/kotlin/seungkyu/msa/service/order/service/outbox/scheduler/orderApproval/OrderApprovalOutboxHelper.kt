@@ -1,7 +1,6 @@
 package seungkyu.msa.service.order.service.outbox.scheduler.orderApproval
 
 import org.bson.types.ObjectId
-import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
 import reactor.core.publisher.Flux
@@ -16,8 +15,6 @@ import seungkyu.msa.service.saga.SagaConstants.Companion.ORDER_SAGA_NAME
 class OrderApprovalOutboxHelper(
     private val orderApprovalOutboxRepository: OrderApprovalOutboxRepository
 ) {
-
-    private val logger = LoggerFactory.getLogger(OrderApprovalOutboxHelper::class.java)
 
     @Transactional(readOnly = true)
     fun getApprovalOutboxMessageByOutboxStatusAndOrderStatus(
@@ -37,9 +34,6 @@ class OrderApprovalOutboxHelper(
     @Transactional
     fun save(orderApprovalOutboxMessage: OrderApprovalOutboxMessage): Mono<OrderApprovalOutboxMessage> {
         return orderApprovalOutboxRepository.save(orderApprovalOutboxMessage)
-            .doOnNext{
-                logger.info("주문 승인 outbox message {}가 저장되었습니다", orderApprovalOutboxMessage.id.toString())
-            }
     }
 
     @Transactional

@@ -1,13 +1,11 @@
 package seungkyu.msa.service.order.service.outbox.scheduler.payment
 
 import org.bson.types.ObjectId
-import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 import seungkyu.msa.service.common.status.OrderStatus
-import seungkyu.msa.service.order.domain.exception.OrderDomainException
 import seungkyu.msa.service.order.service.outbox.model.payment.PaymentEventPayload
 import seungkyu.msa.service.order.service.outbox.model.payment.PaymentOutboxMessage
 import seungkyu.msa.service.order.service.ports.output.repository.PaymentOutboxRepository
@@ -19,8 +17,6 @@ import java.time.LocalDateTime
 @Component
 class PaymentOutboxHelper(
     private val paymentOutboxRepository: PaymentOutboxRepository) {
-
-    private val logger = LoggerFactory.getLogger(PaymentOutboxHelper::class.java)
 
     @Transactional(readOnly = true)
     fun getPaymentOutboxMessageByOutboxStatusAndOrderStatus(
@@ -42,13 +38,6 @@ class PaymentOutboxHelper(
     @Transactional
     fun save(paymentOutboxMessage: PaymentOutboxMessage): Mono<PaymentOutboxMessage> {
         return paymentOutboxRepository.save(paymentOutboxMessage)
-            .switchIfEmpty(
-                Mono.defer{
-                    throw OrderDomainException("${paymentOutboxMessage.id}에 해당하는 paymentOutbox를 저장 할 수 없습니다.")
-                }
-            ).doOnNext {
-                logger.info("${paymentOutboxMessage.id}에 해당하는 paymentOutbox가 저장되었습니다.")
-            }
     }
 
     @Transactional
@@ -78,10 +67,6 @@ class PaymentOutboxHelper(
             outboxStatus = outboxStatus,
             orderStatuses = orderStatuses
         ).then()
-    }
-
-    fun deleteById(id: ObjectId): Mono<Void>{
-        return paymentOutboxRepository.deleteById(id = id).then()
     }
 
 }

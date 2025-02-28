@@ -21,6 +21,6 @@ class PaymentOutboxCleanerScheduler(
             listOf(OrderStatus.CANCELLED, OrderStatus.APPROVED)
         ).subscribe()
 
-        logger.info("PaymentOutboxMessage가 청소되었습니다.")
+        logger.info("clean up 스케줄러에 의해 Payment outbox 데이터베이스가 정리되었습니다.")
     }
 }

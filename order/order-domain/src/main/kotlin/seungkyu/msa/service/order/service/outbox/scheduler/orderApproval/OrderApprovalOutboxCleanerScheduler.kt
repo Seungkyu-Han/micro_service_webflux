@@ -21,6 +21,6 @@ class OrderApprovalOutboxCleanerScheduler(
             listOf(OrderStatus.APPROVED, OrderStatus.CANCELLED)
         ).subscribe()
 
-        logger.info("clean up 스케줄러에 의해 데이터베이스가 정리되었습니다.")
+        logger.info("clean up 스케줄러에 의해 Order approval outbox 데이터베이스가 정리되었습니다.")
     }
 }
