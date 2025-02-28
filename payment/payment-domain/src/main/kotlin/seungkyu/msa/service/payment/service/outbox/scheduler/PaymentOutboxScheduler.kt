@@ -12,12 +12,12 @@ import seungkyu.msa.service.payment.service.ports.output.repository.PaymentOutbo
 
 
 @Component
-class OrderOutboxScheduler(
+class PaymentOutboxScheduler(
     private val paymentOutboxRepository: PaymentOutboxRepository,
     private val paymentResponseMessagePublisher: PaymentResponseMessagePublisher
 ) {
 
-    private val logger = LoggerFactory.getLogger(OrderOutboxScheduler::class.java)
+    private val logger = LoggerFactory.getLogger(PaymentOutboxScheduler::class.java)
 
     @Transactional
     @Scheduled(fixedDelay = 10000, initialDelay = 10000)
