@@ -6,6 +6,7 @@ import kotlinx.coroutines.reactor.mono
 import org.bson.types.ObjectId
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import reactor.core.publisher.Mono
 import seungkyu.msa.service.common.status.OrderStatus
 import seungkyu.msa.service.common.status.PaymentStatus
@@ -35,6 +36,7 @@ class PaymentRequestMessageListenerImpl(
 
     private val logger = LoggerFactory.getLogger(PaymentRequestMessageListenerImpl::class.java)
 
+    @Transactional
     override fun completePayment(paymentRequestDto: PaymentRequestDto): Mono<Void>{
         return mono {
             //해당 이벤트를 수신한 적 있는지 확인
@@ -58,10 +60,13 @@ class PaymentRequestMessageListenerImpl(
                 )
 
                 //결제 후 상태를 데이터베이스에 저장
-                saveToDB(payment = payment, credit = credit).awaitSingle()
+                logger.info("주문 {}의 결제 후 상태를 데이터베이스에 저장하려고 합니다", paymentRequestDto.id)
+                saveToDB(payment = payment, credit = credit).awaitSingleOrNull()
+                logger.info("주문 {}의 결제 후 상태를 데이터베이스에 저장완료", paymentRequestDto.id)
 
                 //결제 Outbox message를 생성 후 데이터베이스에 저장
                 val paymentOutboxMessage = paymentRequestDtoToPaymentOutboxMessage(paymentRequestDto, paymentEvent)
+                logger.info("주문 {}의 outbox를 데이터베이스에 저장하려고 합니다", paymentOutboxMessage.id)
                 paymentOutboxRepository.save(paymentOutboxMessage).awaitSingle()
                 logger.info("주문 {}에 대한 결제 응답을 outbox에 저장했습니다.", paymentRequestDto.id)
             }
