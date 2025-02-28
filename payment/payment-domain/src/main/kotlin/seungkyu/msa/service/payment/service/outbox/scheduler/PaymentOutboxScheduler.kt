@@ -22,15 +22,15 @@ class PaymentOutboxScheduler(
     @Transactional
     @Scheduled(fixedDelay = 10000, initialDelay = 10000)
     fun processOutboxMessages() {
+        logger.info("결제 응답을 전송하는 스케줄러가 동작합니다")
         paymentOutboxRepository.findByTypeAndOutboxStatus(
             outboxStatus = OutboxStatus.STARTED
-        ).map{
+        ).flatMap{
             paymentOutboxMessage ->
 
             logger.info("주문 {}에 대한 결제 응답을 전송하려고 합니다", paymentOutboxMessage)
 
-            paymentResponseMessagePublisher.publish(
-                paymentOutboxMessage, ::updateOutboxMessage)
+            paymentResponseMessagePublisher.publish(paymentOutboxMessage, ::updateOutboxMessage)
                 .doOnSuccess{
                     logger.info("주문 {}에 대한 결제 응답이 전송되었습니다", paymentOutboxMessage)
                 }

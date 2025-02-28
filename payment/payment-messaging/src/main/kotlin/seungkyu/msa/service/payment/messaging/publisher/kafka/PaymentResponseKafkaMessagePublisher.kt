@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.kafka.core.reactive.ReactiveKafkaProducerTemplate
 import org.springframework.stereotype.Component
 import reactor.core.publisher.Mono
+import reactor.core.scheduler.Schedulers
 import seungkyu.msa.service.kafka.model.PaymentResponseAvroModel
 import seungkyu.msa.service.kafka.model.PaymentStatus
 import seungkyu.msa.service.outbox.OutboxStatus
@@ -23,7 +24,7 @@ class PaymentResponseKafkaMessagePublisher(
 
     override fun publish(
         paymentOutboxMessage: PaymentOutboxMessage,
-        callback: (PaymentOutboxMessage, OutboxStatus) -> Unit
+        callback: (PaymentOutboxMessage, OutboxStatus) -> Mono<Void>
     ): Mono<Void> {
 
         logger.info("주문 {}의 결제 이벤트 전송을 준비 중입니다.", paymentOutboxMessage.id)
@@ -34,10 +35,10 @@ class PaymentResponseKafkaMessagePublisher(
             paymentResponseTopic,
             paymentOutboxMessage.id.toString(),
             paymentResponseAvroModel
-        ).doOnNext {
-            callback(paymentOutboxMessage, OutboxStatus.COMPLETED)
+        ).publishOn(Schedulers.boundedElastic()).doOnNext {
+            callback(paymentOutboxMessage, OutboxStatus.COMPLETED).subscribe()
         }.doOnError{
-            callback(paymentOutboxMessage, OutboxStatus.FAILED)
+            callback(paymentOutboxMessage, OutboxStatus.FAILED).subscribe()
         }.doFinally {
             logger.info("주문 {}의 결제 이벤트 전송했니다.", paymentOutboxMessage.id)
         }.then()

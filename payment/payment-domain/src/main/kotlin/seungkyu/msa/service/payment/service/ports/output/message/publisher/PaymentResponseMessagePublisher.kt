@@ -7,5 +7,5 @@ import seungkyu.msa.service.payment.service.outbox.model.PaymentOutboxMessage
 interface PaymentResponseMessagePublisher {
 
     fun publish(paymentOutboxMessage: PaymentOutboxMessage,
-                callback: (PaymentOutboxMessage, OutboxStatus) -> Unit): Mono<Void>
+                callback: (PaymentOutboxMessage, OutboxStatus) -> Mono<Void>): Mono<Void>
 }
