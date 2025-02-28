@@ -1,0 +1,11 @@
+{
+  "namespace": "seungkyu.msa.service.kafka.model",
+  "type": "record",
+  "name": "CustomerCreateAvroModel",
+  "fields": [
+    {
+      "name": "id",
+      "type": "string"
+    }
+  ]
+}
