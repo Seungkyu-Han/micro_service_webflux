@@ -18,6 +18,7 @@ dependencies {
     implementation(project(":order:order-domain"))
 
     implementation(project(":infrastructure:kafka"))
+    implementation(project(":infrastructure:outbox"))
     implementation("org.apache.avro:avro:1.12.0")
     implementation("org.mongodb:bson:5.3.1")
 
@@ -27,6 +28,10 @@ dependencies {
 
     implementation("org.springframework.boot:spring-boot-starter-webflux")
     implementation("io.confluent:kafka-avro-serializer:7.8.0")
+
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-rx3")
 }
 
 tasks.test {

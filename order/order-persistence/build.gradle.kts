@@ -15,6 +15,7 @@ repositories {
 dependencies {
     implementation(project(":common:common-domain"))
     implementation(project(":order:order-domain"))
+    implementation(project(":infrastructure:outbox"))
 
     implementation("org.springframework.boot:spring-boot-starter-data-mongodb-reactive")
 

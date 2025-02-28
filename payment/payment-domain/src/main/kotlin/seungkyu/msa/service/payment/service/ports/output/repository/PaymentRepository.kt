@@ -8,5 +8,5 @@ interface PaymentRepository {
 
     fun save(payment: Payment): Mono<Payment>
 
-    fun findByOrderId(orderId: ObjectId): Mono<Payment>
+    fun findById(orderId: ObjectId): Mono<Payment>
 }

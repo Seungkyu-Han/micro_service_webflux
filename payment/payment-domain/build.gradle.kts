@@ -14,10 +14,16 @@ repositories {
 
 dependencies {
     implementation(project(":common:common-domain"))
+    implementation(project(":infrastructure:outbox"))
+    implementation(project(":infrastructure:saga"))
     implementation("org.mongodb:bson:5.3.1")
 
     implementation("org.springframework.boot:spring-boot-starter-webflux")
     implementation("org.springframework:spring-tx:6.2.3")
+
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-rx3")
 
 }
 

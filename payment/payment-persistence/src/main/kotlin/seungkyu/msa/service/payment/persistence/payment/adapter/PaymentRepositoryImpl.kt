@@ -21,7 +21,7 @@ class PaymentRepositoryImpl(
             .map(this::paymentEntityToPayment)
     }
 
-    override fun findByOrderId(orderId: ObjectId): Mono<Payment> =
+    override fun findById(orderId: ObjectId): Mono<Payment> =
         paymentMongoRepository.findById(orderId)
             .map(this::paymentEntityToPayment)
 

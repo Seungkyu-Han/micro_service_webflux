@@ -1,0 +1,35 @@
+{
+  "namespace": "seungkyu.msa.service.kafka.model",
+  "type": "record",
+  "name": "PaymentResponseAvroModel",
+  "fields": [
+    {
+      "name": "id",
+      "type": "string"
+    },
+
+    {
+      "name": "customerId",
+      "type": "string"
+    },
+
+    {
+      "name": "price",
+      "type": "long"
+    },
+
+    {
+      "name": "createdAt",
+      "type": "long"
+    },
+
+    {
+      "name": "paymentStatus",
+      "type": {
+        "type": "enum",
+        "name": "PaymentStatus",
+        "symbols": ["COMPLETED", "CANCELLED", "FAILED"]
+      }
+    }
+  ]
+}

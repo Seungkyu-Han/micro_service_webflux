@@ -18,6 +18,7 @@ dependencies {
     implementation(project(":payment:payment-domain"))
 
     implementation(project(":infrastructure:kafka"))
+    implementation(project(":infrastructure:outbox"))
     implementation("org.apache.avro:avro:1.12.0")
     implementation("org.mongodb:bson:5.3.1")
 

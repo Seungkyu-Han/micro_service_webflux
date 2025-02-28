@@ -21,7 +21,8 @@ class OrderRepositoryImpl(
     }
 
     override fun findById(id: ObjectId): Mono<Order> {
-        return orderMongoRepository.findById(id).map(::orderEntityToOrder)
+        return orderMongoRepository.findById(id)
+            .map(::orderEntityToOrder)
     }
 
     private fun orderEntityToOrder(orderEntity: OrderEntity): Order {

@@ -9,4 +9,8 @@ data class PaymentRequestDto(
     val price: Long,
     val createdAt: LocalDateTime,
     val paymentOrderStatus: PaymentOrderStatus
-)
+){
+    override fun toString(): String {
+        return "PaymentRequestDto(id='$id', customerId='$customerId', price=$price, createdAt=$createdAt, paymentOrderStatus=$paymentOrderStatus)"
+    }
+}
