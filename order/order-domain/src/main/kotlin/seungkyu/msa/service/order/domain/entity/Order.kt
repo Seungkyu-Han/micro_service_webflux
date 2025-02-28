@@ -42,4 +42,10 @@ data class Order(
         }
         orderStatus = OrderStatus.APPROVED
     }
+
+    override fun toString(): String {
+        return "Order(orderId=$orderId, customerId=$customerId, restaurantId=$restaurantId, price=$price, orderItems=$orderItems, orderStatus=$orderStatus)"
+    }
+
+
 }

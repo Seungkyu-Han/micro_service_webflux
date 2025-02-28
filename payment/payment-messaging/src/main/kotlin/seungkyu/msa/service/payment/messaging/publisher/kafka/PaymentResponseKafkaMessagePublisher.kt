@@ -26,15 +26,10 @@ class PaymentResponseKafkaMessagePublisher(
         paymentOutboxMessage: PaymentOutboxMessage,
         callback: (PaymentOutboxMessage, OutboxStatus) -> Mono<Void>
     ): Mono<Void> {
-
-        logger.info("주문 {}의 결제 이벤트 전송을 준비 중입니다.", paymentOutboxMessage.id)
-
-        val paymentResponseAvroModel = paymentEventToPaymentResponseAvroModel(paymentOutboxMessage)
-
         return reactiveKafkaProducerTemplate.send(
             paymentResponseTopic,
             paymentOutboxMessage.id.toString(),
-            paymentResponseAvroModel
+            paymentEventToPaymentResponseAvroModel(paymentOutboxMessage)
         ).publishOn(Schedulers.boundedElastic()).doOnNext {
             callback(paymentOutboxMessage, OutboxStatus.COMPLETED).subscribe()
         }.doOnError{

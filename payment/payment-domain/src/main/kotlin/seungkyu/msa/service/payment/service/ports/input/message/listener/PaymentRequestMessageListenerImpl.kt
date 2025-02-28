@@ -46,7 +46,6 @@ class PaymentRequestMessageListenerImpl(
             ).awaitSingleOrNull()
 
             if (existedPaymentOutboxMessage == null){
-                logger.info("주문 {}에 대한 결제 요청을 수신했습니다", paymentRequestDto.id)
 
                 //결제를 생성
                 val payment = paymentRequestDtoToPayment(paymentRequestDto)

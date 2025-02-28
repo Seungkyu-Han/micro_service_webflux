@@ -3,19 +3,19 @@ package seungkyu.msa.service.order.service.ports.input.message.listener.restaura
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
 import seungkyu.msa.service.order.service.dto.message.RestaurantApprovalResponse
-import seungkyu.msa.service.order.service.saga.RestaurantApprovalSaga
+import seungkyu.msa.service.order.service.saga.OrderApprovalSaga
 
 @Component
 class RestaurantApprovalResponseMessageListenerImpl(
-    private val restaurantApprovalSaga: RestaurantApprovalSaga,
+    private val orderApprovalSaga: OrderApprovalSaga,
 ): RestaurantApprovalResponseMessageListener {
 
     override fun orderApproved(restaurantApprovalResponse: RestaurantApprovalResponse) {
-        restaurantApprovalSaga.process(restaurantApprovalResponse).subscribe()
+        orderApprovalSaga.process(restaurantApprovalResponse).subscribe()
     }
 
     @Transactional
     override fun orderRejected(restaurantApprovalResponse: RestaurantApprovalResponse) {
-        restaurantApprovalSaga.rollback(restaurantApprovalResponse).subscribe()
+        orderApprovalSaga.rollback(restaurantApprovalResponse).subscribe()
     }
 }

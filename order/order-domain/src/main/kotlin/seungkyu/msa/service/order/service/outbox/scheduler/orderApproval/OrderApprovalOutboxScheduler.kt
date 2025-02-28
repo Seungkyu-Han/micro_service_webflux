@@ -21,18 +21,19 @@ class OrderApprovalOutboxScheduler(
     private val logger = LoggerFactory.getLogger(OrderApprovalOutboxScheduler::class.java)
 
     @Transactional
-    @Scheduled(fixedDelay = 10000, initialDelay = 10000)
+    @Scheduled(fixedDelay = 5000, initialDelay = 5000)
     override fun processOutboxMessages() {
+        logger.info("승인 요청을 보내는 스케줄러가 동작합니다.")
         mono{
-            orderApprovalOutboxHelper.getApprovalOutboxMessageByOutboxStatusAndOrderStatus(
-                OutboxStatus.STARTED,
-                listOf(OrderStatus.PAID)
+            orderApprovalOutboxHelper.getApprovalOutboxMessageByOutboxStatusAndOrderStatus(OutboxStatus.STARTED, listOf(OrderStatus.PAID)
             ).flatMap{
                 orderApprovalOutboxMessage ->
-                logger.info("스케줄러에 의해 {} 주문의 승인 요청을 진행하려고 합니다.", orderApprovalOutboxMessage.id)
+                logger.info("스케줄러에 의해 {} 주문의 승인 요청을 전송려고 합니다.", orderApprovalOutboxMessage.id)
                 restaurantRequestMessagePublisher.publish(
                     orderApprovalOutboxMessage, ::updateOutboxStatus
-                )
+                ).doOnSuccess {
+                    logger.info("스케줄러에 의해 {} 주문의 승인 요청을 전송했습니다.", orderApprovalOutboxMessage.id)
+                }
             }.subscribe()
         }.subscribe()
     }
