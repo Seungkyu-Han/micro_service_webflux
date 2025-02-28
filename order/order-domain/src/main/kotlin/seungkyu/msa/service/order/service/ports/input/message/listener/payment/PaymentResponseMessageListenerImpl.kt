@@ -16,7 +16,7 @@ class PaymentResponseMessageListenerImpl(
         orderPaymentSaga.process(paymentResponse)
             .subscribe()
 
-        logger.info("{} 주문의 결제가 완려되었습니다.", paymentResponse.id)
+        logger.info("{} 주문의 결제가 완료되었습니다.", paymentResponse.id)
     }
 
     override fun paymentCancelled(paymentResponse: PaymentResponse) {

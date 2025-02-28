@@ -13,9 +13,15 @@ import seungkyu.msa.service.order.domain.OrderDomainService
 import seungkyu.msa.service.order.domain.entity.Order
 import seungkyu.msa.service.order.domain.event.OrderPaidEvent
 import seungkyu.msa.service.order.service.dto.message.PaymentResponse
+import seungkyu.msa.service.order.service.outbox.model.orderApproval.OrderApprovalEventPayload
+import seungkyu.msa.service.order.service.outbox.model.orderApproval.OrderApprovalEventProduct
+import seungkyu.msa.service.order.service.outbox.model.orderApproval.OrderApprovalOutboxMessage
 import seungkyu.msa.service.order.service.outbox.model.payment.PaymentOutboxMessage
+import seungkyu.msa.service.order.service.outbox.scheduler.orderApproval.OrderApprovalOutboxHelper
 import seungkyu.msa.service.order.service.outbox.scheduler.payment.PaymentOutboxHelper
 import seungkyu.msa.service.order.service.ports.output.repository.OrderRepository
+import seungkyu.msa.service.outbox.OutboxStatus
+import seungkyu.msa.service.saga.SagaConstants.Companion.ORDER_SAGA_NAME
 import seungkyu.msa.service.saga.SagaStep
 import java.time.LocalDateTime
 
@@ -23,27 +29,28 @@ import java.time.LocalDateTime
 class OrderPaymentSaga(
     private val orderDomainService: OrderDomainService,
     private val orderRepository: OrderRepository,
-    private val paymentOutboxHelper: PaymentOutboxHelper
+    private val paymentOutboxHelper: PaymentOutboxHelper,
+    private val orderApprovalOutboxHelper: OrderApprovalOutboxHelper
 ): SagaStep<PaymentResponse> {
 
     private val logger = LoggerFactory.getLogger(OrderPaymentSaga::class.java)
 
     override fun process(data: PaymentResponse): Mono<Void> {
 
-        return paymentOutboxHelper.getPaymentOutboxMessageByIdAndOrderStatus(
-            id = ObjectId(data.id),
-            orderStatuses = listOf(OrderStatus.PENDING)
-        ).mapNotNull {
-            it
-        }.map {
-            orderPaymentOutboxMessage ->
-            completePaymentForOrder(data).flatMap {
-                orderPaidEvent ->
+        return mono{
+            val paymentOutboxMessage = paymentOutboxHelper.getPaymentOutboxMessageByIdAndOrderStatus(
+                id = ObjectId(data.id),
+                orderStatuses = listOf(OrderStatus.PENDING)).awaitSingleOrNull()
+
+            if (paymentOutboxMessage != null) {
+                val orderPaidEvent = completePaymentForOrder(data).awaitSingle()
+
                 paymentOutboxHelper.save(
                     getUpdatedPaymentOutboxMessage(
-                        orderPaymentOutboxMessage,
-                        orderPaidEvent.order.orderStatus)
-                )
+                        paymentOutboxMessage, orderPaidEvent.order.orderStatus)).awaitSingle()
+
+                orderApprovalOutboxHelper.save(
+                    createOrderApprovalOutboxMessageByOrderPaidEvent(orderPaidEvent)).awaitSingle()
             }
         }.then()
     }
@@ -80,7 +87,6 @@ class OrderPaymentSaga(
     }
 
     private fun completePaymentForOrder(paymentResponse: PaymentResponse): Mono<OrderPaidEvent> {
-        logger.info("{}의 결제를 진행하려고 합니다", paymentResponse.id)
         return orderRepository.findById(ObjectId(paymentResponse.id))
             .flatMap{
                 val orderPaidEvent = orderDomainService.payOrder(order = it)
@@ -106,5 +112,27 @@ class OrderPaymentSaga(
             PaymentStatus.FAILED -> listOf(OrderStatus.PENDING, OrderStatus.PAID)
             PaymentStatus.UNKNOWN -> throw RuntimeException("Unknown payment status: $paymentStatus")
         }
+    }
+
+    private fun createOrderApprovalOutboxMessageByOrderPaidEvent(orderPaidEvent: OrderPaidEvent): OrderApprovalOutboxMessage {
+        return OrderApprovalOutboxMessage(
+            id = orderPaidEvent.order.orderId.id,
+            createdAt = LocalDateTime.now(),
+            processedAt = LocalDateTime.now(),
+            type = ORDER_SAGA_NAME,
+            payload = OrderApprovalEventPayload(
+                restaurantId = orderPaidEvent.order.restaurantId.id,
+                price = orderPaidEvent.order.price.amount,
+                products = orderPaidEvent.order.orderItems.map{
+                    OrderApprovalEventProduct(
+                        id = it.productId.id,
+                        quantity = it.quantity,
+                    )
+                }
+            ),
+            orderStatus = orderPaidEvent.order.orderStatus,
+            outboxStatus = OutboxStatus.STARTED,
+            version = 0
+        )
     }
 }
