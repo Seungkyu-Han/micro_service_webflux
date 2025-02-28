@@ -90,11 +90,14 @@ class RestaurantApprovalSaga(
                     )
                 ).awaitSingle()
 
-                paymentOutboxHelper.savePaymentOutboxMessage(
-                    paymentOutboxPayload = orderCancelledEventToOrderPaymentEventPayload(orderCancelledEvent),
-                    orderStatus = orderCancelledEvent.order.orderStatus,
-                    outboxStatus = OutboxStatus.STARTED
-                ).awaitSingle()
+                paymentOutboxHelper.deleteById(id = orderCancelledEvent.order.orderId.id)
+                    .then(
+                        paymentOutboxHelper.savePaymentOutboxMessage(
+                            paymentOutboxPayload = orderCancelledEventToOrderPaymentEventPayload(orderCancelledEvent),
+                            orderStatus = orderCancelledEvent.order.orderStatus,
+                            outboxStatus = OutboxStatus.STARTED
+                        )
+                    ).awaitSingle()
 
                 logger.info("주문 {}는 취소요청되었습니다", orderCancelledEvent.order.orderId.id)
             }

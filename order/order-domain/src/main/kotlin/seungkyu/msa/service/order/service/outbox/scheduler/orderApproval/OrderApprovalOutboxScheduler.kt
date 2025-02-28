@@ -27,7 +27,7 @@ class OrderApprovalOutboxScheduler(
             orderApprovalOutboxHelper.getApprovalOutboxMessageByOutboxStatusAndOrderStatus(
                 OutboxStatus.STARTED,
                 listOf(OrderStatus.PAID)
-            ).map{
+            ).flatMap{
                 orderApprovalOutboxMessage ->
                 logger.info("스케줄러에 의해 {} 주문의 승인 요청을 진행하려고 합니다.", orderApprovalOutboxMessage.id)
                 restaurantRequestMessagePublisher.publish(

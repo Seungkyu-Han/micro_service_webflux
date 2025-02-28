@@ -10,6 +10,6 @@ data class PaymentEventPayload(
     val customerId: ObjectId,
     val price: Long,
     val createdAt: LocalDateTime,
-    val paymentOrderStatus: PaymentOrderStatus,
+    var paymentOrderStatus: PaymentOrderStatus,
     var orderStatus: OrderStatus
 )

@@ -96,7 +96,7 @@ class PaymentRequestMessageListenerImpl(
                     payment = payment, credit = credit, failureMessages = mutableListOf()
                 )
 
-                saveToDB(payment = payment, credit = credit).awaitSingle()
+                saveToDB(payment = payment, credit = credit).awaitSingleOrNull()
 
                 val paymentOutboxMessage = paymentRequestDtoToPaymentOutboxMessage(paymentRequestDto, paymentEvent)
                 paymentOutboxRepository.save(paymentOutboxMessage).awaitSingle()

@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional
 import reactor.core.publisher.Mono
 import reactor.core.scheduler.Schedulers
 import seungkyu.msa.service.common.status.OrderStatus
+import seungkyu.msa.service.common.status.PaymentOrderStatus
 import seungkyu.msa.service.order.service.outbox.model.payment.PaymentOutboxMessage
 import seungkyu.msa.service.order.service.ports.output.message.publisher.payment.PaymentRequestMessagePublisher
 import seungkyu.msa.service.outbox.OutboxScheduler
@@ -28,7 +29,11 @@ class PaymentOutboxScheduler(
             OutboxStatus.STARTED,
             listOf(OrderStatus.PENDING, OrderStatus.CANCELLING)
         ).publishOn(Schedulers.boundedElastic()).map{
-            paymentOutboxMessage ->
+            paymentOutboxMessage: PaymentOutboxMessage ->
+            if(paymentOutboxMessage.payload.orderStatus == OrderStatus.CANCELLING) {
+
+                paymentOutboxMessage.payload.paymentOrderStatus = PaymentOrderStatus.CANCELLING
+            }
             paymentRequestMessagePublisher.publish(
                 paymentOutboxMessage = paymentOutboxMessage,
                 callback = ::updateOutboxStatus

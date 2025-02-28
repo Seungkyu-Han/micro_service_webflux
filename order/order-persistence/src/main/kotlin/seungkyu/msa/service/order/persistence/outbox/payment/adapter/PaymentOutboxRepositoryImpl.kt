@@ -54,4 +54,8 @@ class PaymentOutboxRepositoryImpl(
             type, outboxStatus, orderStatuses
         )
     }
+
+    override fun deleteById(id: ObjectId): Mono<Void> {
+        return paymentOutboxMongoRepository.deleteById(id)
+    }
 }

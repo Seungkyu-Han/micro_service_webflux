@@ -7,5 +7,5 @@ import seungkyu.msa.service.outbox.OutboxStatus
 interface OrderApprovalRequestMessagePublisher {
 
     fun publish(orderApprovalOutboxMessage: OrderApprovalOutboxMessage,
-                callback: (OrderApprovalOutboxMessage, OutboxStatus) -> Unit): Mono<Void>
+                callback: (OrderApprovalOutboxMessage, OutboxStatus) -> Mono<Void>): Mono<Void>
 }

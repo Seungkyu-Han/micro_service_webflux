@@ -25,4 +25,6 @@ interface PaymentOutboxRepository {
         type: String,
         outboxStatus: OutboxStatus,
         orderStatuses: List<OrderStatus>): Mono<Void>
+
+    fun deleteById(id: ObjectId): Mono<Void>
 }

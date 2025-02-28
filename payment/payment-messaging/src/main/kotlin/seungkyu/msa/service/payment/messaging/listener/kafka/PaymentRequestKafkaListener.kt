@@ -34,7 +34,8 @@ class PaymentRequestKafkaListener(
 
         values.forEach {
             paymentRequestAvroModel ->
-            val paymentRequestDto = paymentRequestAvroModelToPaymentRequestDto(paymentRequestAvroModel)
+            val paymentRequestDto:PaymentRequestDto = paymentRequestAvroModelToPaymentRequestDto(paymentRequestAvroModel)
+            logger.info(paymentRequestDto.toString())
             if(paymentRequestDto.paymentOrderStatus == PaymentOrderStatus.PENDING){
                 logger.info("주문 {}의 결제가 진행 중입니다", paymentRequestDto.id)
                 paymentRequestMessageListener.completePayment(paymentRequestDto)

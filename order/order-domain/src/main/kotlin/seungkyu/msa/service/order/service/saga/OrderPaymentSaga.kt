@@ -63,7 +63,7 @@ class OrderPaymentSaga(
             ).awaitSingleOrNull()
 
             if(orderPaymentOutboxMessage == null){
-                logger.info("{}의 주문이 이미 처리되었습니다", data.id)
+                logger.info("{}의 주문이 이미 취소 처리되었습니다", data.id)
             }else{
                 val order = rollbackPaymentForOrder(data).awaitSingle()
 

@@ -80,4 +80,8 @@ class PaymentOutboxHelper(
         ).then()
     }
 
+    fun deleteById(id: ObjectId): Mono<Void>{
+        return paymentOutboxRepository.deleteById(id = id).then()
+    }
+
 }

@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.kafka.core.reactive.ReactiveKafkaProducerTemplate
 import org.springframework.stereotype.Component
 import reactor.core.publisher.Mono
+import reactor.core.scheduler.Schedulers
 import seungkyu.msa.service.kafka.model.Product
 import seungkyu.msa.service.kafka.model.RestaurantApprovalRequestAvroModel
 import seungkyu.msa.service.kafka.model.RestaurantOrderStatus
@@ -24,7 +25,7 @@ class OrderApprovalEventKafkaPublisher(
 
     override fun publish(
         orderApprovalOutboxMessage: OrderApprovalOutboxMessage,
-        callback: (OrderApprovalOutboxMessage, OutboxStatus) -> Unit
+        callback: (OrderApprovalOutboxMessage, OutboxStatus) -> Mono<Void>
     ): Mono<Void> {
 
         logger.info("주문 {}의 승인 요청을 전송하려고 합니다", orderApprovalOutboxMessage.id)
@@ -35,10 +36,10 @@ class OrderApprovalEventKafkaPublisher(
             orderApprovalRequestTopic,
             orderApprovalOutboxMessage.id.toString(),
             restaurantApprovalRequestAvroModel
-        ).doOnNext {
-            callback(orderApprovalOutboxMessage, OutboxStatus.COMPLETED)
+        ).publishOn(Schedulers.boundedElastic()).doOnNext {
+            callback(orderApprovalOutboxMessage, OutboxStatus.COMPLETED).subscribe()
         }.doOnError {
-            callback(orderApprovalOutboxMessage, OutboxStatus.FAILED)
+            callback(orderApprovalOutboxMessage, OutboxStatus.FAILED).subscribe()
         }.doFinally {
             logger.info("주문 {}의 승인 요청을 전송했습니다", orderApprovalOutboxMessage.id)
         }.then()
