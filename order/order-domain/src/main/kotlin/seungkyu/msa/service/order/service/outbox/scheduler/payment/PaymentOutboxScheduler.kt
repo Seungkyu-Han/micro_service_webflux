@@ -21,7 +21,7 @@ class PaymentOutboxScheduler(
     private val logger = LoggerFactory.getLogger(PaymentOutboxScheduler::class.java)
 
     @Transactional
-    @Scheduled(fixedDelay = 10000, initialDelay = 10000)
+    @Scheduled(fixedDelay = 5000, initialDelay = 5000)
     override fun processOutboxMessages() {
         logger.info("결제 요청을 보내는 스케줄러가 동작합니다.")
         paymentOutboxHelper.getPaymentOutboxMessageByOutboxStatusAndOrderStatus(

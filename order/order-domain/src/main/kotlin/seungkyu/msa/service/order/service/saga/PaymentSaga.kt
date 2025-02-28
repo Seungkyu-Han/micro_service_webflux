@@ -54,9 +54,9 @@ class PaymentSaga(
     override fun rollback(data: PaymentResponse): Mono<Void> {
         return mono{
             //해당 이벤트가 이미 처리되었는지 확인
-            val orderPaymentOutboxMessage = paymentOutboxHelper.getPaymentOutboxMessageByIdAndOrderStatus(
-                ObjectId(data.id),
-                paymentSagaMapper.getCurrentOrderStatus(data.paymentStatus)
+            val orderPaymentOutboxMessage:PaymentOutboxMessage? = paymentOutboxHelper.getPaymentOutboxMessageByIdAndOrderStatus(
+                id = ObjectId(data.id),
+                orderStatuses = listOf(OrderStatus.CANCELLING)
             ).awaitSingleOrNull()
 
             if(orderPaymentOutboxMessage != null){

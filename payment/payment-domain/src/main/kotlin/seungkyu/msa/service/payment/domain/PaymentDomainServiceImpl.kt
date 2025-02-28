@@ -26,7 +26,6 @@ class PaymentDomainServiceImpl: PaymentDomainService {
         validateCredit(payment = payment, credit = credit, failureMessages = failureMessages)
 
         if(failureMessages.isEmpty()){
-            logger.info("주문 {}의 결제가 시작되었습니다.", payment.id.id)
             //금액을 빼고 상태를 완료로 변경
             credit.subtractCreditAmount(payment.price)
             payment.paymentStatus = PaymentStatus.COMPLETED
@@ -35,7 +34,6 @@ class PaymentDomainServiceImpl: PaymentDomainService {
         else{
             //금액을 빼지 않고 상태를 실패로 변경
             logger.error(failureMessages.joinToString("\n", postfix = "\n"))
-            logger.info("주문 {}의 결제가 실패했습니다.", payment.id.id)
             payment.paymentStatus = PaymentStatus.FAILED
             return PaymentFailedEvent(payment, LocalDateTime.now(), failureMessages)
         }
@@ -49,12 +47,10 @@ class PaymentDomainServiceImpl: PaymentDomainService {
         addCredit(credit = credit, payment = payment)
 
         if(failureMessages.isEmpty()){
-            logger.info("주문 {}의 결제가 취소되었습니다.", payment.id.id)
             payment.paymentStatus = PaymentStatus.CANCELLED
             return PaymentFailedEvent(payment, LocalDateTime.now(), failureMessages)
         }
         else{
-            logger.info("주문 {}의 결제 취소가 실패했습니다.", payment.id.id)
             payment.paymentStatus = PaymentStatus.FAILED
             return PaymentFailedEvent(payment, LocalDateTime.now(), failureMessages)
         }
@@ -66,7 +62,6 @@ class PaymentDomainServiceImpl: PaymentDomainService {
 
     private fun validateCredit(payment: Payment, credit: Credit, failureMessages: MutableList<String>) {
         if(!credit.totalCreditAmount.isGreaterThan(payment.price)){
-            logger.error("{} 고객님의 잔액이 충분하지 않습니다", payment.customerId.id)
             failureMessages.add("${payment.customerId.id} 고객님의 잔액이 충분하지 않습니다")
         }
     }

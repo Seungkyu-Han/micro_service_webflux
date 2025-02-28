@@ -12,4 +12,8 @@ data class PaymentOutboxMessage(
     var payload: PaymentEventPayload,
     var outboxStatus: OutboxStatus,
     val version: Int
-)
+){
+    override fun toString(): String {
+        return "PaymentOutboxMessage(id=$id, createdAt=$createdAt, processedAt=$processedAt, type='$type', payload=$payload, outboxStatus=$outboxStatus, version=$version)"
+    }
+}
