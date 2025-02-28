@@ -10,6 +10,7 @@ import reactor.kafka.sender.SenderOptions
 import seungkyu.msa.service.kafka.model.PaymentCancelledResponseAvroModel
 import seungkyu.msa.service.kafka.model.PaymentCompletedResponseAvroModel
 import seungkyu.msa.service.kafka.model.PaymentFailedResponseAvroModel
+import seungkyu.msa.service.kafka.model.PaymentResponseAvroModel
 
 
 @Configuration
@@ -26,6 +27,16 @@ class KafkaConfig {
             "specific.avro.reader" to true
         )
     }
+
+
+    @Bean
+    fun reactiveKafkaPaymentResponseAvroModelProducerTemplate(): ReactiveKafkaProducerTemplate<String, PaymentResponseAvroModel> =
+        ReactiveKafkaProducerTemplate(SenderOptions.create(HashMap<String, Any>().apply {
+            put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092")
+            put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, org.apache.kafka.common.serialization.StringSerializer::class.java)
+            put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, io.confluent.kafka.serializers.KafkaAvroSerializer::class.java)
+            put("schema.registry.url", "http://localhost:8081")
+        }))
 
     @Bean
     fun reactiveKafkaPaymentCompletedResponseAvroModelProducerTemplate(): ReactiveKafkaProducerTemplate<String, PaymentCompletedResponseAvroModel> =

@@ -15,9 +15,7 @@ spring:
 kafka:
   topic:
     payment-request: payment_request_topic
-    payment-completed-response: payment_completed_response_topic
-    payment-cancelled-response: payment_cancelled_response_topic
-    payment-failed-response: payment_failed_response_topic
+    payment-response: payment_response_topic
 
   consumer:
     payment-consumer-group-id: payment_consumer_group
