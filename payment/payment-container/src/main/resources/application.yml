@@ -5,27 +5,28 @@ spring:
       port: 6379
       password: ${REDIS_PASSWORD}
     mongodb:
-      uri: mongodb://seungkyu:1204@localhost:27017/payment?authSource=admin
+      uri: ${MONGODB_URI}
   kafka:
     bootstrap-servers: localhost:9092
     consumer:
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
-      properties:
-        schema.registry.url: http://localhost:8081
-        specific.avro.reader: true
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      bootstrap-servers: localhost:9092
+#      properties:
+#        schema.registry.url: http://localhost:8081
+#        specific.avro.reader: true
 
 
 
 kafka:
   topic:
-    payment-request: payment_request_topic
+    payment-request: debezium.orders.payment_outboxes
     payment-response: payment_response_topic
     customer-create: customer_create_topic
 
   consumer:
     payment-consumer-group-id: payment_consumer_group
-    customer-consumer-group-id: customer_consumer_groip
+    customer-consumer-group-id: customer_consumer_group
 
 server:
   port: 12041
