@@ -1,0 +1,28 @@
+services:
+  debezium:
+    container_name: debezium
+    image: debezium/connect:2.7.3.Final
+    ports:
+      - "8083:8083"
+    environment:
+      GROUP_ID: 1
+      CONFIG_STORAGE_TOPIC: "connect-config"
+      OFFSET_STORAGE_TOPIC: "connect-offsets"
+      STATUS_STORAGE_TOPIC: "connect-status"
+      BOOTSTRAP_SERVERS: kafka:29092
+      LOGGING_LEVEL: "DEBUG"
+      CONNECT_SCHEMA_NAME_ADJUSTMENT_MODE: avro
+      KEY_CONVERTER: org.apache.kafka.connect.json.JsonConverter
+      VALUE_CONVERTER: org.apache.kafka.connect.json.JsonConverter
+      CONNECT_KEY_CONVERTER_SCHEMA_REGISTRY_URL: http://schema-registry:8081
+      CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_URL: http://schema-registry:8081
+    volumes:
+      - "./debezium:/kafka/connect/debezium-connector-schemaregistry-7.2.6"
+    networks:
+      - seungkyu
+
+networks:
+  seungkyu:
+    driver: bridge
+    name: seungkyu
+    external: true

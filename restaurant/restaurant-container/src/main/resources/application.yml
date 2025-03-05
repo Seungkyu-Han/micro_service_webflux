@@ -1,7 +1,7 @@
 spring:
   data:
     mongodb:
-      uri: mongodb://seungkyu:1204@localhost:27017/msa?authSource=admin
+      uri: ${MONGODB_URI}
   kafka:
     bootstrap-servers: localhost:9092
     consumer:

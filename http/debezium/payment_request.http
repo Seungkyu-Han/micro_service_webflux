@@ -1,0 +1,21 @@
+GET http://localhost:8083/connectors/
+
+###
+POST http://localhost:8083/connectors/
+Content-Type: application/json
+
+{
+  "name": "order-payment-request-connector",
+  "config": {
+    "connector.class": "io.debezium.connector.mongodb.MongoDbConnector",
+    "tasks.max": "1",
+    "mongodb.connection.string": "mongodb://vp:teamvp1204!@mongodb:27017/?replicaSet=rs0",
+    "mongodb.authSource": "admin",
+    "collection.include.list": "orders.payment_outboxes",
+    "topic.prefix": "debezium",
+    "tombstones.on.delete": "false"
+  }
+}
+
+###
+DELETE http://localhost:8083/connectors/order-payment-request-connector

@@ -6,11 +6,10 @@ import org.springframework.stereotype.Component
 import reactor.core.publisher.Mono
 import seungkyu.msa.service.customer.domain.event.CustomerCreatedEvent
 import seungkyu.msa.service.customer.service.ports.output.message.publisher.CustomerMessagePublisher
-import seungkyu.msa.service.kafka.model.CustomerCreateAvroModel
 
 @Component
 class CustomerCreateKafkaMessagePublisher(
-    private val reactiveKafkaProducerTemplate: ReactiveKafkaProducerTemplate<String, CustomerCreateAvroModel>,
+    private val reactiveKafkaProducerTemplate: ReactiveKafkaProducerTemplate<String, String>,
     @Value("\${kafka.topic.customer-create}")
     private val customerCreateTopic: String
 ): CustomerMessagePublisher{
@@ -18,13 +17,8 @@ class CustomerCreateKafkaMessagePublisher(
     override fun publish(customerCreatedEvent: CustomerCreatedEvent): Mono<Void> {
         val customerId = customerCreatedEvent.customer.id.id.toString()
 
-        val customerCreateAvroModel = CustomerCreateAvroModel.newBuilder()
-            .setId(customerId)
-            .build()
-
         return reactiveKafkaProducerTemplate.send(
             customerCreateTopic,
-            customerId,
-            customerCreateAvroModel).then()
+            customerId, customerId).then()
     }
 }
